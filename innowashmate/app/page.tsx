@@ -1,8 +1,11 @@
+"use client"
+
+import App from "./pages/App";
 
 export default function Home() {
   return (
     <main>
-
+      <App/>
     </main>
   );
 }
