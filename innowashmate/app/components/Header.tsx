@@ -1,32 +1,39 @@
 import React from 'react';
 import Image from 'next/image';
 import photo from '../assets/logo.svg';
+import dash from '../assets/dash.svg';
+import home from '../assets/home.svg';
+import info from '../assets/info.svg';
+import user from '../assets/user.svg';
+import { Link } from 'react-router-dom';
+
+import './header.css'
 
 const Header: React.FC = () => {
   return (
-    <div className="w-500 h-screen flex flex-col items-center justify-center bg-gradient-to-b from-purple-500 to-purple-300 text-white">
-      <div className="mb-12">
-        <Image src={photo} alt="Logo" width={200} height={200} />
+    <main>
+      <div className='sidebar'>
+        <Image src={photo} alt="Logo" width={425.85} height={241} className='logo' />
+        <div className='pages'>
+          <div className='services'>
+            <Image src={dash} alt="dash" width={40} height={40} />
+            <h1 className='servicef'>DashBoard</h1>
+          </div>
+          <Link to="/"><div className='services'>
+            <Image src={home} alt="home" width={40} height={40} />
+            <h1 className='servicef'>Home</h1>
+          </div></Link>
+          <Link to="/about">          <div className='services'>
+            <Image src={info} alt="info" width={40} height={40} />
+            <h1 className='servicef'>About</h1>
+          </div></Link>
+          <div className='services'>
+            <Image src={user} alt="user" width={40} height={40} />
+            <h1 className='servicef'>Logout</h1>
+          </div>
+        </div>
       </div>
-      <nav className="flex flex-col space-y-4">
-        <a href="#" className="flex items-center text-lg font-medium hover:text-purple-200">
-          <span className="material-icons mr-2">dashboard</span>
-          Dashboard
-        </a>
-        <a href="#" className="flex items-center text-lg font-medium hover:text-purple-200">
-          <span className="material-icons mr-2">home</span>
-          Home
-        </a>
-        <a href="#" className="flex items-center text-lg font-medium hover:text-purple-200">
-          <span className="material-icons mr-2">info</span>
-          About
-        </a>
-        <a href="#" className="flex items-center text-lg font-medium hover:text-purple-200">
-          <span className="material-icons mr-2">logout</span>
-          Logout
-        </a>
-      </nav>
-    </div>
+    </main>
   );
 };
 

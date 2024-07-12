@@ -1,0 +1,33 @@
+.sidebar {
+    position: absolute;
+    width: 450px;
+    height: 100vh;
+    background: linear-gradient(166.03deg, rgba(85, 51, 255, 0.81) -35%, rgba(230, 230, 230, 0.81) 120.05%);
+}
+
+.logo {
+    position: relative;
+    left: 11px;
+}
+
+.servicef {
+    font-size: 36px;
+    font-weight: bold;
+    font-family: "Satoshi", sans-serif;
+    color: #E6E6E6;
+}
+
+.services {
+    display: flex;
+    flex-direction: row;
+    column-gap: 4px;
+}
+
+.pages {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    top: 100px;
+    left: 34px;
+    row-gap: 7px;
+}

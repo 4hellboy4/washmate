@@ -1,0 +1,30 @@
+.logoH {
+    position: relative;
+    left: 50%;
+    top: 5%;
+
+}
+
+.servicedesc {
+    font-size: 36px;
+    font-weight: bold;
+    font-family: "Satoshi", sans-serif;
+    color: black;
+    text-align: center;
+    width: 1000px;
+    position: relative;
+    left: 17em;
+    top: 2em;
+}
+
+.credits {
+    font-size: 24px;
+    font-weight: 1000;
+    font-family: "Satoshi", sans-serif;
+    color: black;
+    text-align: center;
+    width: 337px;
+    position: relative;
+    left: 40em;
+    top: 19.5em;
+}

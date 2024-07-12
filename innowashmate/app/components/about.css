@@ -1,0 +1,49 @@
+.logoH {
+    position: relative;
+    left: 50%;
+    top: 5%;
+
+}
+
+.servicedesc {
+    font-size: 36px;
+    font-weight: bold;
+    font-family: "Satoshi", sans-serif;
+    color: black;
+    text-align: center;
+    width: 1000px;
+    position: relative;
+    left: 17em;
+    top: 2em;
+}
+
+.Buttons {
+    width: 1431px;
+    height: 200px;
+    background: linear-gradient(166.03deg, rgba(28, 180, 173, 0.81) -35%, rgba(230, 230, 230, 0.81) 120.05%);
+    position: relative;
+    left: 28em;
+    top: 10em;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    column-gap: 160px;
+}
+
+.btn {
+    font-family: "Satoshi", sans-serif;
+    font-size: 32px;
+    font-weight: bold;
+    width: 200px;
+    height: 75px;
+    background-color: #F8F9D7;
+    border-radius: 25px;
+    transition: all 1s ease-in-out;
+}
+
+.btn:hover {
+    background-color: #5533FF;
+    color: #F8F9D7;
+
+}
