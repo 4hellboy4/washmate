@@ -1,0 +1,31 @@
+.services {
+    padding-left: 1rem;
+    display: flex;
+    flex-direction: row;
+    column-gap: 2rem;
+    background-color: #21ad01;
+    /*background: linear-gradient(130.03deg, rgb(32, 199, 0.83) -35%, rgba(124, 255, 124, 0.81) 100.05%);*/
+    height: 3rem;
+    width: 16rem;
+    /*margin-bottom: 1rem;*/
+    margin-left: 5rem;
+    border-radius: 4rem;
+}
+
+.servicef {
+    padding-top: 0.6rem;
+    padding-left: 1rem;
+    font-size: 18px;
+    font-weight: bold;
+    font-family: "Satoshi", sans-serif;
+    color: #ffffff;
+}
+
+.pages {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    top: 1rem;
+    left: 34px;
+    row-gap: 7px;
+}

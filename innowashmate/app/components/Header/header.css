@@ -6,7 +6,8 @@
 }
 
 .logo {
-    position: relative;
+    position: fixed;
+    bottom: 0;
     left: 11px;
 }
 
@@ -16,6 +17,8 @@
     font-family: "Satoshi", sans-serif;
     color: #E6E6E6;
 }
+
+
 
 .services {
     display: flex;
@@ -31,3 +34,4 @@
     left: 34px;
     row-gap: 7px;
 }
+
