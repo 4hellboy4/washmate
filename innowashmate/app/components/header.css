@@ -1,33 +1,128 @@
 .sidebar {
-    position: absolute;
-    width: 450px;
-    height: 100vh;
-    background: linear-gradient(166.03deg, rgba(85, 51, 255, 0.81) -35%, rgba(230, 230, 230, 0.81) 120.05%);
-}
-
-.logo {
     position: relative;
-    left: 11px;
+    width: 26.042vw;
+    height: 92.593vh;
+    background: #EFEFEF;
+    left: 24px;
+    top: 40px;
+    border-radius: 25px;
+    border: solid 5px #91A3B0;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .servicef {
-    font-size: 36px;
+    font-size: 24px;
     font-weight: bold;
     font-family: "Satoshi", sans-serif;
     color: #E6E6E6;
+    margin: 0;
+    flex: 1;
+    text-align: center;
 }
 
 .services {
     display: flex;
     flex-direction: row;
     column-gap: 4px;
+
+}
+
+.button {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+    height: 60px;
+    border-radius: 25px;
+    background-color: #40BA21;
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.icon {
+    position: absolute;
+    left: 20px;
+}
+
+.usericon {
+    position: relative;
+    left: 20px;
 }
 
 .pages {
-    position: relative;
     display: flex;
     flex-direction: column;
-    top: 100px;
-    left: 34px;
-    row-gap: 7px;
+    justify-items: center;
+    align-items: center;
+    row-gap: 15px;
+}
+
+.logout {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    height: 50px;
+    border-radius: 25px;
+    background-color: #40BA21;
+}
+
+.telegram {
+    display: flex;
+    flex-direction: row;
+    column-gap: 5px;
+}
+
+.Name {
+    font-weight: 700;
+    font-size: 32px;
+    font-family: "Satoshi", sans-serif;
+    text-align: center;
+}
+
+.email {
+    font-weight: 500;
+    font-size: 20px;
+    font-family: "Satoshi", sans-serif;
+    text-align: center;
+}
+
+.telegramtag {
+    font-weight: 700;
+    font-size: 24px;
+    font-family: "Satoshi", sans-serif;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+
+.picemoji {
+    display: flex;
+    width: 250px;
+    height: 250px;
+    background: linear-gradient(166.03deg, rgba(64, 186, 33, 0.81) -35%, rgba(230, 230, 230, 0.81) 120.05%), #868686;
+    border-radius: 50%;
+    align-self: center;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+}
+
+.logo {
+    position: relative;
+    width: 250px;
+    height: auto;
+    align-self: center;
+    left: 20px;
 }
