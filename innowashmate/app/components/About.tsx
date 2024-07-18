@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import photo from '../../assets/logoh.svg';
+import photo from '../assets/logoh.svg';
 import './about.css'
 const Home: React.FC = () => {
     return (
