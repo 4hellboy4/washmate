@@ -1,30 +1,22 @@
 import React from 'react';
 import Image from 'next/image';
+import photo from '../assets/logoh.svg';
 import './about.css'
-const About: React.FC = () => {
+const Home: React.FC = () => {
     return (
         <div className='home'>
-            <div className='aboutcontent'>
-                <p className='abouttxt1'>InnoWashMate is Website Created for Innopolis Unveristy students to facilitate and organize Laundry room Usage.</p>
-                <p className='abouttxt2'>Here you can Book and see the schedule of the laundry room throughout of all Innopolis Universities Dorms</p>
-                <div className='bookbtna'>
-                    <h1 className='booka'>BOOK</h1>
+            <div className='content'>
+                <Image src={photo} alt='logo' width={600} height={241} className='logoH' />
+                <div>
+                    <h1 className='servicedesc'>Here you can Book and see the schedule of the laundry room throughout of all Innopolis Universities Dorms</h1>
                 </div>
-                <div className='rules'>
-                    <h1>RULES</h1>
-                    <ul>
-                        <li>Do not Book if you will not use it</li>
-                        <li>Do not make Bookings For someone Else</li>
-                        <li>Do not Ignore Other People’s Bookings </li>
-                    </ul>
-                    <p className='term'>Any Reports or  Violations To our Terms and Conditions will result in a Ban from our application.</p>
-                </div>
-                <div className='credits'>
-                    <h1>Designed And Developped By Innovelopers</h1>
+                <div className='Buttons'>
+                    <button className='btn'>Book</button>
+                    <button className='btn'> Schedule</button>
                 </div>
             </div>
         </div>
     );
 };
 
-export default About;
+export default Home;
