@@ -27,6 +27,12 @@
     height: 75px;
     background-color: #40BA21;
     border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.5s ease-out;
+}
+
+.bookbtna:hover {
+    background-color: #64c04d;
 }
 
 .booka {

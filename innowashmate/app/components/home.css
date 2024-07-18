@@ -73,6 +73,12 @@
     border-radius: 25px;
     margin: 30px;
     top: 25px;
+    transition: all 0.5s ease-out;
+    cursor: pointer;
+}
+
+.bookbtn:hover {
+    background-color: #64c04d;
 }
 
 .book {
@@ -100,6 +106,8 @@
     border-radius: 25px;
 }
 
+
+
 .building {
     font-size: 64px;
     font-weight: 700;
@@ -115,4 +123,12 @@
     height: 100px;
     background: linear-gradient(60deg, rgba(64, 186, 33, 1) 0%, rgba(229, 229, 229, 1) 100%);
     border-radius: 50%;
+    transition: all 0.5s ease-in-out;
+    transition: transform 1s;
+    cursor: pointer;
+}
+
+.notification:hover {
+    background: linear-gradient(100deg, rgba(236, 0, 0, 1) 0%, rgba(229, 229, 229, 1) 100%);
+    transform: rotate(360deg);
 }
