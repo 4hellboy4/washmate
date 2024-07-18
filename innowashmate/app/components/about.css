@@ -1,49 +1,62 @@
-.logoH {
-    position: relative;
-    left: 50%;
-    top: 5%;
-
-}
-
-.servicedesc {
-    font-size: 36px;
-    font-weight: bold;
-    font-family: "Satoshi", sans-serif;
-    color: black;
-    text-align: center;
-    width: 1000px;
-    position: relative;
-    left: 17em;
-    top: 2em;
-}
-
-.Buttons {
-    width: 1431px;
-    height: 200px;
-    background: linear-gradient(166.03deg, rgba(28, 180, 173, 0.81) -35%, rgba(230, 230, 230, 0.81) 120.05%);
-    position: relative;
-    left: 28em;
-    top: 10em;
+.aboutcontent {
     display: flex;
-    flex-direction: row;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    column-gap: 160px;
+
 }
 
-.btn {
+.abouttxt1 {
+    font-size: 30px;
+    font-weight: 700;
+    text-align: center;
     font-family: "Satoshi", sans-serif;
-    font-size: 32px;
-    font-weight: bold;
-    width: 200px;
-    height: 75px;
-    background-color: #F8F9D7;
-    border-radius: 25px;
-    transition: all 1s ease-in-out;
+    margin: 20px;
 }
 
-.btn:hover {
-    background-color: #5533FF;
-    color: #F8F9D7;
+.abouttxt2 {
+    width: 1000px;
+    font-size: 30px;
+    font-weight: 700;
+    text-align: center;
+    font-family: "Satoshi", sans-serif;
+    margin: 20px;
+}
 
+.bookbtna {
+    width: 300px;
+    height: 75px;
+    background-color: #40BA21;
+    border-radius: 25px;
+}
+
+.booka {
+    font-family: "Satoshi", sans-serif;
+    font-weight: 700;
+    font-size: 48px;
+    color: #FFFFFF;
+    text-align: center;
+}
+
+.rules {
+    margin: 20px;
+    text-align: center;
+    font-family: "Satoshi", sans-serif;
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.term {
+    font-size: 24px;
+    font-weight: 1000;
+    margin-top: 10px;
+}
+
+.credits {
+    margin: 40px;
+    text-align: center;
+    font-family: "Satoshi", sans-serif;
+    font-size: 18px;
+    font-weight: 1000;
+    align-self: flex-end;
+    justify-self: flex-end;
 }

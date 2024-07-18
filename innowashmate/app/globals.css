@@ -25,5 +25,7 @@
 }
 
 body {
+  background-color: #EFEFEF;
   margin: 0;
+  overflow-x: hidden;
 }
