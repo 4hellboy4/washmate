@@ -1,62 +1,149 @@
-import React from 'react';
-import Image from 'next/image';
-import arrow from '../assets/arrow.svg';
-import './dashboard.css'
+import React, { useState } from 'react';
+import './dashboard.css';
+
+interface Schedule {
+    [dorm: string]: {
+        [floor: string]: {
+            [machine: string]: {
+                [day: string]: {
+                    [hour: string]: string; // this stores booked hours with the user's name
+                };
+            };
+        };
+    };
+}
+
+const initialSchedule: Schedule = {
+    "Dorm 7": {
+        "Floor 11": {
+            "Dryer 1": {
+                "Today": {},
+                "Tomorrow": {},
+                "Day After Tomorrow": {}
+            },
+            "Dryer 2": {
+                "Today": {},
+                "Tomorrow": {},
+                "Day After Tomorrow": {}
+            },
+            "Washer 1": {
+                "Today": {},
+                "Tomorrow": {},
+                "Day After Tomorrow": {}
+            },
+            "Washer 2": {
+                "Today": {},
+                "Tomorrow": {},
+                "Day After Tomorrow": {}
+            }
+        }
+    }
+};
+
+const hours = Array.from({ length: 24 }, (_, i) => `${i.toString().padStart(2, '0')}:00`);
+
 const Dashboard: React.FC = () => {
+    const [selectedDorm, setSelectedDorm] = useState("Dorm 7");
+    const [selectedFloor, setSelectedFloor] = useState("Floor 11");
+    const [selectedMachine, setSelectedMachine] = useState("Dryer 1");
+    const [selectedDay, setSelectedDay] = useState("Today");
+    const [time, setTime] = useState("00:00");
+    const [schedule, setSchedule] = useState<Schedule>(initialSchedule);
+
+    const handleDormChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        setSelectedDorm(event.target.value);
+    };
+
+    const handleFloorChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        setSelectedFloor(event.target.value);
+    };
+
+    const handleMachineChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setSelectedMachine(event.target.id);
+    };
+
+    const handleDayChange = (day: string) => {
+        setSelectedDay(day);
+    };
+
+    const handleTimeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        setTime(event.target.value);
+    };
+
+    const handleBooking = () => {
+        const newSchedule = { ...schedule };
+        if (!newSchedule[selectedDorm]) newSchedule[selectedDorm] = {};
+        if (!newSchedule[selectedDorm][selectedFloor]) newSchedule[selectedDorm][selectedFloor] = {};
+        if (!newSchedule[selectedDorm][selectedFloor][selectedMachine]) newSchedule[selectedDorm][selectedFloor][selectedMachine] = {};
+        if (!newSchedule[selectedDorm][selectedFloor][selectedMachine][selectedDay]) newSchedule[selectedDorm][selectedFloor][selectedMachine][selectedDay] = {};
+
+        newSchedule[selectedDorm][selectedFloor][selectedMachine][selectedDay][time] = "User Name"; // we will replace "User Name" with actual user data (after login we can getUserFirstName)
+        setSchedule(newSchedule);
+    };
+
     return (
         <div className='home'>
             <div className='centring'>
                 <div className='dropselection'>
-                    <select name="dorm" className='dchoice'>
-                        <option value="6">Dorm 6</option>
-                        <option value="7">Dorm 7</option>
+                    <select name="dorm" className='dchoice' onChange={handleDormChange} value={selectedDorm}>
+                        <option value="Dorm 6">Dorm 6</option>
+                        <option value="Dorm 7">Dorm 7</option>
                     </select>
-                    <select name="floor" className='dchoice'>
-                        <option value="1">Floor 1</option>
-                        <option value="2">Floor 2</option>
-                        <option value="3">Floor 3</option>
-                        <option value="4">Floor 4</option>
-                        <option value="5">Floor 5</option>
-                        <option value="6">Floor 6</option>
-                        <option value="7">Floor 7</option>
-                        <option value="8">Floor 8</option>
-                        <option value="9">Floor 9</option>
-                        <option value="10">Floor 10</option>
-                        <option value="11">Floor 11</option>
-                        <option value="12">Floor 12</option>
-                        <option value="13">Floor 13</option>
+                    <select name="floor" className='dchoice' onChange={handleFloorChange} value={selectedFloor}>
+                        {Array.from({ length: 13 }, (_, i) => (
+                            <option key={i} value={`Floor ${i + 1}`}>{`Floor ${i + 1}`}</option>
+                        ))}
                     </select>
                 </div>
                 <div className='radios'>
                     <div className='radiostyle'>
-                        <input type="radio" id="Washer1" name='machine' />
-                        <label htmlFor="Washer1">Washer 1</label>
+                        <input type="radio" id="Washer 1" name='machine' onChange={handleMachineChange} />
+                        <label htmlFor="Washer 1">Washer 1</label>
                     </div>
                     <div className='radiostyle'>
-                        <input type="radio" id="Washer2" name='machine' />
-                        <label htmlFor="Washer2">Washer 2</label>
+                        <input type="radio" id="Washer 2" name='machine' onChange={handleMachineChange} />
+                        <label htmlFor="Washer 2">Washer 2</label>
                     </div>
                     <div className='radiostyle'>
-                        <input type="radio" id="Dryer1" name='machine' />
-                        <label htmlFor="Dryer1">Dryer 1</label>
+                        <input type="radio" id="Dryer 1" name='machine' onChange={handleMachineChange} />
+                        <label htmlFor="Dryer 1">Dryer 1</label>
                     </div>
                     <div className='radiostyle'>
-                        <input type="radio" id="Dryer2" name='machine' />
-                        <label htmlFor="Dryer2">Dryer 2</label>
+                        <input type="radio" id="Dryer 2" name='machine' onChange={handleMachineChange} />
+                        <label htmlFor="Dryer 2">Dryer 2</label>
                     </div>
                 </div>
-                <div className='schdule'>
+                <div className='schedule'>
                     <div className='days'>
-                        <div className='daystyle'>
+                        <div className={`daystyle ${selectedDay === "Today" ? "selected" : ""}`} onClick={() => handleDayChange("Today")}>
                             <h1>Today</h1>
                         </div>
-                        <div className='daystyle'>
+                        <div className={`daystyle ${selectedDay === "Tomorrow" ? "selected" : ""}`} onClick={() => handleDayChange("Tomorrow")}>
                             <h1>Tomorrow</h1>
                         </div>
-                        <div className='daystyle'>
+                        <div className={`daystyle ${selectedDay === "Day After Tomorrow" ? "selected" : ""}`} onClick={() => handleDayChange("Day After Tomorrow")}>
                             <h1 className='longday'>Day After Tomorrow</h1>
                         </div>
                     </div>
+                    <div className='schedule-table'>
+                        {hours.map((hour) => (
+                            <div key={hour} className='schedule-row'>
+                                <div className='time-slot'>{hour}</div>
+                                <div className='booking-info'>
+                                    {schedule[selectedDorm] && schedule[selectedDorm][selectedFloor] && schedule[selectedDorm][selectedFloor][selectedMachine] && schedule[selectedDorm][selectedFloor][selectedMachine][selectedDay] && schedule[selectedDorm][selectedFloor][selectedMachine][selectedDay][hour] ?
+                                        schedule[selectedDorm][selectedFloor][selectedMachine][selectedDay][hour] : ""}
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+                <div className='time-selection'>
+                    <select className='time-choice' onChange={handleTimeChange} value={time}>
+                        {hours.map(hour => (
+                            <option key={hour} value={hour}>{hour}</option>
+                        ))}
+                    </select>
+                    <button className='book-button' onClick={handleBooking}>BOOK</button>
                 </div>
             </div>
         </div>
