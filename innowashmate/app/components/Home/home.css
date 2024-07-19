@@ -1,0 +1,25 @@
+.home {
+    position: relative;
+    width: 70.313vw;
+    height: 83.333vh;
+    background-color: rgb(229, 229, 229);
+    top: 40px;
+    right: 30px;
+    border-radius: 20px;
+    display: flex;
+}
+
+.Bookings {
+    position: relative;
+    width: 23.438vw;
+    height: 74vh;
+    background-color: #D9D9D9;
+    border-radius: 25px;
+    align-self: center;
+    left: 40px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    justify-content: center;
+    align-items: center;
+}

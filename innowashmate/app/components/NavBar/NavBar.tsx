@@ -1,31 +1,26 @@
 import React from 'react';
 import Image from 'next/image';
-import photo from '../assets/logoh.svg';
-import dash from '../assets/dash.svg';
-import home from '../assets/home.svg';
-import info from '../assets/info.svg';
-import user from '../assets/user.svg';
-import smile from '../assets/smile.svg';
-import telegram from '../assets/telegram.svg';
+import photo from '../../assets/logoh.svg';
+import dash from '../../assets/dash.svg';
+import home from '../../assets/home.svg';
+import info from '../../assets/info.svg';
+import user from '../../assets/user.svg';
+import smile from '../../assets/smile.svg';
+import telegram from '../../assets/telegram.svg';
 import { Link } from 'react-router-dom';
 
-import './header.css'
+import PersonalInfo from "./PersonalInfo/PersonalInfo";
 
-const Header: React.FC = () => {
+import './NavBar.css'
+
+const NavBar: React.FC = () => {
   return (
     <main>
       <div className='sidebar'>
         <div className='picemoji'>
           <Image src={smile} alt='smiley Face'></Image>
         </div>
-        <div className='info'>
-          <h1 className='Name'>Ahmed Baha Eddine Alimi</h1>
-          <h3 className='email'>a.alimi@innopolis.univeristy</h3>
-          <div className='telegram'>
-            <Image src={telegram} alt='telegram'></Image>
-            <h5 className='telegramtag'>@Allimi3</h5>
-          </div>
-        </div>
+        <PersonalInfo/>
         <div className='pages'>
           <Link to={"/"} >
             <div className='button'>
@@ -56,4 +51,4 @@ const Header: React.FC = () => {
   );
 };
 
-export default Header;
+export default NavBar;

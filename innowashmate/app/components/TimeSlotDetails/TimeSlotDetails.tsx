@@ -1,8 +1,10 @@
 import React from 'react';
 import Image from 'next/image';
-import './item.css'
-import clock from '../assets/clock.svg';
-const Item: React.FC = () => {
+import './TimeSlotDetails.css'
+import clock from '../../assets/clock.svg';
+
+
+const TimeSlotDetails: React.FC = () => {
     return (
         <div className='home'>
             <div className='itemdetails'>
@@ -36,9 +38,8 @@ const Item: React.FC = () => {
                     <h1>CANCEL</h1>
                 </div>
             </div>
-
         </div>
     );
 };
 
-export default Item;
+export default TimeSlotDetails;
