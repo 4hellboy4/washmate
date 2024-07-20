@@ -1,11 +1,10 @@
 import React from 'react';
-import Image from 'next/image';
-import notif from '../../assets/notfi.svg';
 import Item from './Item/Item'
 import BookBtn from './BookBtn/BookBtn';
 import ActionsContext from './ActionContext/ActionsContext';
 
-import './home.css'
+import './home.css';
+
 const Home: React.FC = () => {
   return (
     <div className='home'>
