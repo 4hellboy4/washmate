@@ -45,6 +45,12 @@ const NavBar: React.FC = () => {
               <h6 className='servicef'>login</h6>
             </div>
           </Link>
+          <Link to={"/signup"} >
+            <div className='button'>
+              <Image src={info} alt='info' className='icon'></Image>
+              <h6 className='servicef'>signup</h6>
+            </div>
+          </Link>
           <div className='logout'>
             <Image src={user} alt='logout' className='usericon'></Image>
             <h6 className='servicef'>Logout</h6>

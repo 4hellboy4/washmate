@@ -6,6 +6,7 @@ import {signInWithEmailAndPassword} from "firebase/auth";
 import {FIREBASE_AUTH} from "@/FirebaseConfig";
 
 import '../Auth.css';
+import {useRouter} from "next/router";
 
 interface FormData {
     email: string;
@@ -29,14 +30,15 @@ const Login: React.FC = () => {
         });
     };
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
         try {
-            e.preventDefault();
-            signInWithEmailAndPassword(FIREBASE_AUTH, formData.email, formData.password);
-            console.log('Login Form submitted:', formData);
-            navigate('/');
-        } catch (e) {
-            console.log(e);
+          const userCredential = await signInWithEmailAndPassword(FIREBASE_AUTH, formData.email, formData.password);
+          const user = userCredential.user;
+          console.log('Login Form submitted:', formData);
+          navigate('/');
+        } catch (error) {
+          console.error("assdfsdf", error);
         }
     };
 
