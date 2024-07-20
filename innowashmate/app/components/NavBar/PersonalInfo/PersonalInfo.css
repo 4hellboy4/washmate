@@ -1,0 +1,33 @@
+.info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.Name {
+    font-weight: 700;
+    font-size: 32px;
+    font-family: "Satoshi", sans-serif;
+    text-align: center;
+}
+
+.email {
+    font-weight: 500;
+    font-size: 20px;
+    font-family: "Satoshi", sans-serif;
+    text-align: center;
+}
+
+.telegram {
+    display: flex;
+    flex-direction: row;
+    column-gap: 5px;
+}
+
+.telegramtag {
+    font-weight: 700;
+    font-size: 24px;
+    font-family: "Satoshi", sans-serif;
+}
