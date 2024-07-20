@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './dashboard.css';
 
 interface Schedule {
@@ -6,11 +7,18 @@ interface Schedule {
         [floor: string]: {
             [machine: string]: {
                 [day: string]: {
-                    [hour: string]: string; // this stores booked hours with the user's name
+                    [hour: string]: string;
                 };
             };
         };
     };
+}
+
+interface BookedMachine {
+    id: string;
+    name: string;
+    time: string;
+    endTime: number;
 }
 
 const initialSchedule: Schedule = {
@@ -49,6 +57,7 @@ const Dashboard: React.FC = () => {
     const [selectedDay, setSelectedDay] = useState("Today");
     const [time, setTime] = useState("00:00");
     const [schedule, setSchedule] = useState<Schedule>(initialSchedule);
+    const navigate = useNavigate();
 
     const handleDormChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         setSelectedDorm(event.target.value);
@@ -77,8 +86,31 @@ const Dashboard: React.FC = () => {
         if (!newSchedule[selectedDorm][selectedFloor][selectedMachine]) newSchedule[selectedDorm][selectedFloor][selectedMachine] = {};
         if (!newSchedule[selectedDorm][selectedFloor][selectedMachine][selectedDay]) newSchedule[selectedDorm][selectedFloor][selectedMachine][selectedDay] = {};
 
-        newSchedule[selectedDorm][selectedFloor][selectedMachine][selectedDay][time] = "User Name"; // we will replace "User Name" with actual user data (after login we can getUserFirstName)
+        if (newSchedule[selectedDorm][selectedFloor][selectedMachine][selectedDay][time]) {
+            alert('This machine is already booked for the selected time');
+            return;
+        }
+
+        newSchedule[selectedDorm][selectedFloor][selectedMachine][selectedDay][time] = "User Name";
         setSchedule(newSchedule);
+
+        const bookedMachines = Object.keys(newSchedule[selectedDorm][selectedFloor]).flatMap((machine) => {
+            return Object.keys(newSchedule[selectedDorm][selectedFloor][machine]).flatMap((day) => {
+                return Object.keys(newSchedule[selectedDorm][selectedFloor][machine][day]).map((time, index) => {
+                    const endTime = Date.now() + 3600000; // 1 hour from now
+                    return {
+                        id: `${selectedDorm}-${selectedFloor}-${machine}-${day}-${time}-${index + 1}`,
+                        name: machine,
+                        time: `${day} ${time}`,
+                        endTime: endTime
+                    };
+                });
+            });
+        });
+
+        localStorage.setItem('bookedMachines', JSON.stringify(bookedMachines));
+        alert('Machine booked successfully');
+        navigate('/');
     };
 
     return (

@@ -4,7 +4,7 @@ import Header from "../components/Header"
 import Home from "../components/Home"
 import About from "../components/About"
 import Dashboard from "../components/Dashboard"
-import Item from "../components/Item"
+import Item from "../components/Item";
 import './app.css'
 
 const App: React.FC = () => {
@@ -16,6 +16,7 @@ const App: React.FC = () => {
           <Route path="/about" element={<About />} />
           <Route path="/" element={<Home />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/item/:id" element={<Item />} />
         </Routes>
       </div>
     </Router>
