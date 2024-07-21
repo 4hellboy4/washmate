@@ -1,99 +1,85 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useNavigate } from 'react-router-dom';
 import clock from '../assets/clock.svg';
 import notif from '../assets/notfi.svg';
 import './home.css';
 
-interface Machine {
+interface BookedMachine {
   id: string;
-  time?: string;
-  name?: string;
-  endTime?: number;
+  name: string;
+  startTime: number;
+  endTime: number;
+  dorm: string;
+  floor: string;
+  day: string;
 }
 
-const placeholderMachines: Machine[] = [
-  { id: '1' },
-  { id: '2' },
-  { id: '3' },
-  { id: '4' },
-];
-
 const Home: React.FC = () => {
-  const [bookedMachines, setBookedMachines] = useState<Machine[]>(placeholderMachines);
+  const [bookedMachines, setBookedMachines] = useState<BookedMachine[]>([]);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const storedBookedMachines = localStorage.getItem('bookedMachines');
-    let fetchedBookedMachines: Machine[] = [];
-    try {
-      fetchedBookedMachines = storedBookedMachines ? JSON.parse(storedBookedMachines) : [];
-    } catch (e) {
-      console.error('Failed to parse booked machines:', e);
-    }
-    if (Array.isArray(fetchedBookedMachines)) {
-      setBookedMachines((prevMachines) =>
-          prevMachines.map((machine, index) =>
-              fetchedBookedMachines[index] || machine
-          )
-      );
-    }
-  }, []);
-
-  useEffect(() => {
+    const storedBookedMachines = JSON.parse(localStorage.getItem('bookedMachines') || '[]');
+    setBookedMachines(storedBookedMachines);
     const interval = setInterval(() => {
-      setBookedMachines((prevMachines) =>
-          prevMachines.map((machine) => {
-            if (machine.endTime && machine.endTime > Date.now()) {
-              const timeLeft = machine.endTime - Date.now();
-              const timeString = new Date(timeLeft).toISOString().substr(11, 8);
-              return { ...machine, time: timeString };
-            } else if (machine.endTime && machine.endTime <= Date.now()) {
-              return { ...machine, time: undefined, endTime: undefined, name: undefined };
-            } else {
-              return machine;
-            }
-          })
-      );
+      const now = Date.now();
+      const updatedBookedMachines = storedBookedMachines.filter((machine: BookedMachine) => machine.endTime > now);
+      setBookedMachines(updatedBookedMachines);
+      localStorage.setItem('bookedMachines', JSON.stringify(updatedBookedMachines));
     }, 1000);
 
     return () => clearInterval(interval);
   }, []);
 
+  const formatTime = (timestamp: number) => {
+    const date = new Date(timestamp);
+    return `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
+  };
+
+  const formatTimeLeft = (startTime: number, endTime: number) => {
+    const now = Date.now();
+    if (now < startTime) {
+      const timeUntilStart = startTime - now;
+      const hours = Math.floor((timeUntilStart / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((timeUntilStart / (1000 * 60)) % 60);
+      const seconds = Math.floor((timeUntilStart / 1000) % 60);
+      return `Starts in ${hours}h ${minutes}m ${seconds}s`;
+    }
+
+    const timeLeft = endTime - now;
+    if (timeLeft <= 0) return 'Time Expired';
+
+    const hours = Math.floor((timeLeft / (1000 * 60 * 60)) % 24);
+    const minutes = Math.floor((timeLeft / (1000 * 60)) % 60);
+    const seconds = Math.floor((timeLeft / 1000) % 60);
+
+    return `${hours}h ${minutes}m ${seconds}s`;
+  };
+
   const handleBookButtonClick = () => {
-    if (bookedMachines.filter((machine) => machine.time).length >= 4) {
-      alert('You cannot book anymore machines');
+    if (bookedMachines.length >= 4) {
+      alert('You cannot book any more machines');
     } else {
       navigate('/dashboard');
     }
   };
 
   const handleMachineClick = (machineId: string) => {
-    const machine = bookedMachines.find(machine => machine.id === machineId);
-    if (machine?.time) {
-      navigate(`/item/${machineId}`);
-    }
+    navigate(`/item/${machineId}`);
   };
 
   return (
       <div className='home'>
         <div className='Bookings'>
-          {bookedMachines.map((machine) => (
+          {bookedMachines.map(machine => (
               <div key={machine.id} className='bookbox' onClick={() => handleMachineClick(machine.id)}>
-                {machine.time ? (
-                    <>
-                      <p className='timeb'>{machine.time}</p>
-                      <Image src={clock} alt='clock' className='clock' />
-                      <div className='machinecont'>
-                        <h1 className='machine'>{machine.name}</h1>
-                        <p className='time'>Time Left: {machine.time}</p>
-                      </div>
-                    </>
-                ) : (
-                    <div className='machinecont'>
-                      <h1 className='machine'>No Booked Machines</h1>
-                    </div>
-                )}
+                <p className='timeb'>{formatTime(machine.startTime)}</p>
+                <Image src={clock} alt='clock' className='clock' />
+                <div className='machinecont'>
+                  <h1 className='machine'>{machine.name}</h1>
+                  <p className='time'>Time Left: {formatTimeLeft(machine.startTime, machine.endTime)}</p>
+                </div>
               </div>
           ))}
           <div className='bookbtn' onClick={handleBookButtonClick}>

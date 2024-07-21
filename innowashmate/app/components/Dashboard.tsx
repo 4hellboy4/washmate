@@ -17,8 +17,11 @@ interface Schedule {
 interface BookedMachine {
     id: string;
     name: string;
-    time: string;
+    startTime: number;
     endTime: number;
+    dorm: string;
+    floor: string;
+    day: string;
 }
 
 const initialSchedule: Schedule = {
@@ -79,7 +82,51 @@ const Dashboard: React.FC = () => {
         setTime(event.target.value);
     };
 
+    const getTimeInMillis = (day: string, time: string) => {
+        const now = new Date();
+        const [hours, minutes] = time.split(':').map(Number);
+        let dayOffset = 0;
+        if (day === "Tomorrow") dayOffset = 1;
+        if (day === "Day After Tomorrow") dayOffset = 2;
+        const date = new Date(now.getFullYear(), now.getMonth(), now.getDate() + dayOffset, hours, minutes, 0, 0);
+        return date.getTime();
+    };
+
+    const countBookings = (floor: string) => {
+        const machines = schedule[selectedDorm][floor];
+        let washerCount = 0;
+        let dryerCount = 0;
+
+        Object.keys(machines).forEach(machine => {
+            Object.keys(machines[machine]).forEach(day => {
+                Object.keys(machines[machine][day]).forEach(hour => {
+                    if (machines[machine][day][hour]) {
+                        if (machine.includes('Washer')) {
+                            washerCount++;
+                        } else if (machine.includes('Dryer')) {
+                            dryerCount++;
+                        }
+                    }
+                });
+            });
+        });
+
+        return { washerCount, dryerCount };
+    };
+
     const handleBooking = () => {
+        const { washerCount, dryerCount } = countBookings(selectedFloor);
+
+        if (selectedMachine.includes('Washer') && washerCount >= 2) {
+            alert('You cannot book any more washers');
+            return;
+        }
+
+        if (selectedMachine.includes('Dryer') && dryerCount >= 2) {
+            alert('You cannot book any more dryers');
+            return;
+        }
+
         const newSchedule = { ...schedule };
         if (!newSchedule[selectedDorm]) newSchedule[selectedDorm] = {};
         if (!newSchedule[selectedDorm][selectedFloor]) newSchedule[selectedDorm][selectedFloor] = {};
@@ -91,18 +138,28 @@ const Dashboard: React.FC = () => {
             return;
         }
 
+        const startTime = getTimeInMillis(selectedDay, time);
+        if (startTime < Date.now()) {
+            alert('You cannot book a time in the past');
+            return;
+        }
+
         newSchedule[selectedDorm][selectedFloor][selectedMachine][selectedDay][time] = "User Name";
         setSchedule(newSchedule);
 
         const bookedMachines = Object.keys(newSchedule[selectedDorm][selectedFloor]).flatMap((machine) => {
             return Object.keys(newSchedule[selectedDorm][selectedFloor][machine]).flatMap((day) => {
                 return Object.keys(newSchedule[selectedDorm][selectedFloor][machine][day]).map((time, index) => {
-                    const endTime = Date.now() + 3600000; // 1 hour from now
+                    const startTime = getTimeInMillis(day, time);
+                    const endTime = startTime + 3600000;
                     return {
                         id: `${selectedDorm}-${selectedFloor}-${machine}-${day}-${time}-${index + 1}`,
                         name: machine,
-                        time: `${day} ${time}`,
-                        endTime: endTime
+                        startTime,
+                        endTime,
+                        dorm: selectedDorm,
+                        floor: selectedFloor,
+                        day
                     };
                 });
             });
