@@ -1,112 +1,116 @@
 .sidebar {
-    position: relative;
-    width: 26.042vw;
-    height: auto;
-    background: #EFEFEF;
-    left: 5%;
-    top: 1em;
-    border-radius: 25px;
-    border: solid 5px #91A3B0;
-    display: flex;
-    flex-direction: column;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+  width: 26.042vw;
+  height: auto;
+  background: #efefef;
+  left: 5%;
+  top: 1em;
+  border-radius: 25px;
+  border: solid 5px #91a3b0;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .servicef {
-    font-size: 1.5em;
-    font-weight: bold;
-    font-family: "Satoshi", sans-serif;
-    margin: 0.5em;
-    flex: 1;
-    text-align: center;
+  font-size: 1.5em;
+  font-weight: bold;
+  font-family: "Satoshi", sans-serif;
+  margin: 0.5em;
+  flex: 1;
+  text-align: center;
 }
 
 .services {
-    display: flex;
-    flex-direction: row;
-    column-gap: 1em;
-
+  display: flex;
+  flex-direction: row;
+  column-gap: 1em;
 }
 
 .button {
-    position: relative;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    width: 17vw;
-    height: 6.5vh;
-    border-radius: 25px;
-    background-color: #40BA21;
-    color: #E6E6E6;
-    border: none;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: all 0.5s ease-in-out;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 17vw;
+  height: 6.5vh;
+  border-radius: 25px;
+  background-color: #40ba21;
+  color: #e6e6e6;
+  border: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.5s ease-in-out;
 }
 
 .button:hover {
-    background-color: #E6E6E6;
-    color: #40BA21;
+  background-color: #e6e6e6;
+  color: #40ba21;
 }
 
 .icon {
-    position: absolute;
-    left: 8%;
+  position: absolute;
+  left: 8%;
 }
 
 .usericon {
-    position: relative;
-    left: 8%;
+  position: relative;
+  left: 8%;
 }
 
 .pages {
-    display: flex;
-    flex-direction: column;
-    justify-items: center;
-    align-items: center;
-    row-gap: 1em;
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
+  row-gap: 1em;
 }
 
 .logout {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    width: 12vw;
-    height: 6.5vh;
-    border-radius: 25px;
-    background-color: #40BA21;
-    color: #E6E6E6;
-    transition: all 0.5s ease-in-out;
-    cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 12vw;
+  height: 6.5vh;
+  border-radius: 25px;
+  background-color: #40ba21;
+  color: #e6e6e6;
+  transition: all 0.5s ease-in-out;
+  cursor: pointer;
 }
 
 .logout:hover {
-    background-color: #fc0909;
+  background-color: #fc0909;
 }
 
 .telegram {
-    display: flex;
-    flex-direction: row;
-    column-gap: 0.5em;
+  display: flex;
+  flex-direction: row;
+  column-gap: 0.5em;
 }
 
 .picemoji {
-    display: flex;
-    width: 15vw;
-    height: 15vw;
-    background: linear-gradient(166.03deg, rgba(64, 186, 33, 0.81) -35%, rgba(230, 230, 230, 0.81) 120.05%), #868686;
-    border-radius: 50%;
-    align-self: center;
-    justify-content: center;
-    align-items: center;
-    margin: 1em;
+  display: flex;
+  width: 15vw;
+  height: 15vw;
+  background: linear-gradient(
+      166.03deg,
+      rgba(64, 186, 33, 0.81) -35%,
+      rgba(230, 230, 230, 0.81) 120.05%
+    ),
+    #868686;
+  border-radius: 50%;
+  align-self: center;
+  justify-content: center;
+  align-items: center;
+  margin: 1em;
 }
 
 .logo {
-    position: relative;
-    width: 15vw;
-    height: auto;
-    align-self: center;
-    left: 1.5em;
+  position: relative;
+  width: 15vw;
+  height: auto;
+  align-self: center;
+  left: 1.5em;
 }

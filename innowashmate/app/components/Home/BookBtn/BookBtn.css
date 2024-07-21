@@ -1,20 +1,20 @@
 .bookbtn {
-    width: 14vw;
-    height: auto;
-    background-color: #40BA21;
-    border-radius: 25px;
-    transition: all 0.5s ease-out;
-    cursor: pointer;
+  width: 14vw;
+  height: auto;
+  background-color: #40ba21;
+  border-radius: 25px;
+  transition: all 0.5s ease-out;
+  cursor: pointer;
 }
 
 .bookbtn:hover {
-    background-color: #64c04d;
+  background-color: #64c04d;
 }
 
 .book {
-    font-family: "Satoshi", sans-serif;
-    font-weight: 700;
-    font-size: 3rem;
-    color: #FFFFFF;
-    text-align: center;
+  font-family: "Satoshi", sans-serif;
+  font-weight: 700;
+  font-size: 3rem;
+  color: #ffffff;
+  text-align: center;
 }

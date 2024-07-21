@@ -16,8 +16,6 @@
   }
 }
 
-
-
 @layer utilities {
   .text-balance {
     text-wrap: balance;
@@ -25,7 +23,7 @@
 }
 
 body {
-  background-color: #EFEFEF;
+  background-color: #efefef;
   margin: 0;
   overflow-x: hidden;
 }

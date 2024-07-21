@@ -1,5 +1,5 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
 interface InputFieldProps {
   type?: string;
@@ -12,18 +12,18 @@ interface InputFieldProps {
 }
 
 const AuthInputField: React.FC<InputFieldProps> = ({
-  type = 'text',
+  type = "text",
   label,
   name,
   value,
   placeholder,
   onChange,
-  className = '',
+  className = "",
 }) => {
   return (
     <div className={`input-field ${className}`}>
       {label && <label htmlFor={name}>{label}</label>}
-      <br/>
+      <br />
       <input
         type={type}
         id={name}

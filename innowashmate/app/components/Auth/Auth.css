@@ -1,18 +1,17 @@
 .auth {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh; /* Full viewport height for centering vertically */
-    width: 100vw;  /* Full viewport width for centering horizontally */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Full viewport height for centering vertically */
+  width: 100vw; /* Full viewport width for centering horizontally */
 }
 
 .auth_block {
-    background: #40BA21;
-    height: 20rem;
-    width: 30rem;
-    border-radius: 3rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  background: #40ba21;
+  height: 20rem;
+  width: 30rem;
+  border-radius: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-
