@@ -1,13 +1,16 @@
 import React from 'react';
-import './BookBtn.css'
+import './BookBtn.css';
 
-const BookBtn: React.FC = () => {
+interface BookBtnProps {
+    onClick: () => void;
+}
+
+const BookBtn: React.FC<BookBtnProps> = ({ onClick }) => {
     return (
-        <div className='bookbtn'>
+        <div className='bookbtn' onClick={onClick}>
             <h1 className='book'>BOOK</h1>
         </div>
     );
 }
-
 
 export default BookBtn;

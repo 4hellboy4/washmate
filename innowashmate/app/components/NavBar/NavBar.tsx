@@ -14,6 +14,9 @@ import PersonalInfo from "./PersonalInfo/PersonalInfo";
 import './NavBar.css'
 
 const NavBar: React.FC = () => {
+
+
+
   return (
     <main>
       <div className='sidebar'>
@@ -51,10 +54,10 @@ const NavBar: React.FC = () => {
               <h6 className='servicef'>signup</h6>
             </div>
           </Link>
-          <div className='logout'>
-            <Image src={user} alt='logout' className='usericon'></Image>
-            <h6 className='servicef'>Logout</h6>
-          </div>
+          {/*<div className='logout'>*/}
+          {/*  <Image src={user} alt='logout' className='usericon'></Image>*/}
+          {/*  <h6 className='servicef'>Logout</h6>*/}
+          {/*</div>*/}
         </div>
         <Image src={photo} alt='logo' className='logo'></Image>
       </div>

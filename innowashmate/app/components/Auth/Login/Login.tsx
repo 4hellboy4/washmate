@@ -4,7 +4,7 @@ import {useNavigate} from 'react-router-dom';
 import AuthInputField from "../AuthInputField/AuthInputField";
 import {signInWithEmailAndPassword} from "firebase/auth";
 import {FIREBASE_AUTH} from "@/FirebaseConfig";
-
+import {Link} from "react-router-dom";
 import '../Auth.css';
 import {useRouter} from "next/router";
 
@@ -43,25 +43,30 @@ const Login: React.FC = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <AuthInputField
-                type="email"
-                label="Email"
-                name="email"
-                value={formData.email}
-                placeholder="Enter your email"
-                onChange={handleChange}
-            />
-            <AuthInputField
-                type="password"
-                label="Password"
-                name="password"
-                value={formData.password}
-                placeholder="Enter your password"
-                onChange={handleChange}
-            />
-            <button type="submit">Login</button>
-        </form>
+        <div>
+            <form onSubmit={handleSubmit}>
+                <AuthInputField
+                    type="email"
+                    label="Email"
+                    name="email"
+                    value={formData.email}
+                    placeholder="Enter your email"
+                    onChange={handleChange}
+                />
+                <AuthInputField
+                    type="password"
+                    label="Password"
+                    name="password"
+                    value={formData.password}
+                    placeholder="Enter your password"
+                    onChange={handleChange}
+                />
+                <button type="submit">Login</button>
+            </form>
+            <Link to={'/signup'}>
+                If not registered - Signup.
+            </Link>
+        </div>
     );
 }
 
