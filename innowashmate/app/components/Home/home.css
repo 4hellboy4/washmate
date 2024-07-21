@@ -1,25 +1,27 @@
 .home {
     position: relative;
-    width: 70.313vw;
-    height: 83.333vh;
+    width: 71vw;
+    height: auto;
     background-color: rgb(229, 229, 229);
     top: 40px;
     right: 30px;
     border-radius: 20px;
     display: flex;
+    justify-content: center;
+    align-content: center;
+    column-gap: 25em;
+    padding: 3em;
 }
 
 .Bookings {
-    position: relative;
-    width: 23.438vw;
+    width: 24vw;
     height: 74vh;
     background-color: #D9D9D9;
     border-radius: 25px;
     align-self: center;
-    left: 40px;
     display: flex;
     flex-direction: column;
-    row-gap: 20px;
+    row-gap: 1.25em;
     justify-content: center;
     align-items: center;
 }

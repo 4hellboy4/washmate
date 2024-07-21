@@ -9,11 +9,13 @@ interface Props {
     left_time: string;
 }
 
-const Item: React.FC<Props> = ({interval, machine, left_time}) => {
+const Item: React.FC<Props> = ({ interval, machine, left_time }) => {
     return (
         <div className='bookbox'>
-            <p className='interval'>{interval}</p>
-            <Image src={clock} alt='clock' className='clock'></Image>
+            <div className='timef'>
+                <p className='interval'>{interval}</p>
+                <Image src={clock} alt='clock' className='clock'></Image>
+            </div>
             <div className='machinecont'>
                 <h1 className='machine'>{machine}</h1>
                 <p className='time'>{left_time}</p>

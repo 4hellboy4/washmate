@@ -1,10 +1,10 @@
 .sidebar {
     position: relative;
     width: 26.042vw;
-    height: 92.593vh;
+    height: auto;
     background: #EFEFEF;
-    left: 24px;
-    top: 40px;
+    left: 5%;
+    top: 1em;
     border-radius: 25px;
     border: solid 5px #91A3B0;
     display: flex;
@@ -13,10 +13,10 @@
 }
 
 .servicef {
-    font-size: 24px;
+    font-size: 1.5em;
     font-weight: bold;
     font-family: "Satoshi", sans-serif;
-    margin: 0;
+    margin: 0.5em;
     flex: 1;
     text-align: center;
 }
@@ -24,7 +24,7 @@
 .services {
     display: flex;
     flex-direction: row;
-    column-gap: 4px;
+    column-gap: 1em;
 
 }
 
@@ -34,8 +34,8 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    width: 300px;
-    height: 60px;
+    width: 17vw;
+    height: 6.5vh;
     border-radius: 25px;
     background-color: #40BA21;
     color: #E6E6E6;
@@ -51,12 +51,12 @@
 
 .icon {
     position: absolute;
-    left: 20px;
+    left: 8%;
 }
 
 .usericon {
     position: relative;
-    left: 20px;
+    left: 8%;
 }
 
 .pages {
@@ -64,7 +64,7 @@
     flex-direction: column;
     justify-items: center;
     align-items: center;
-    row-gap: 15px;
+    row-gap: 1em;
 }
 
 .logout {
@@ -72,8 +72,8 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    width: 200px;
-    height: 50px;
+    width: 12vw;
+    height: 6.5vh;
     border-radius: 25px;
     background-color: #40BA21;
     color: #E6E6E6;
@@ -88,25 +88,25 @@
 .telegram {
     display: flex;
     flex-direction: row;
-    column-gap: 5px;
+    column-gap: 0.5em;
 }
 
 .picemoji {
     display: flex;
-    width: 250px;
-    height: 250px;
+    width: 15vw;
+    height: 15vw;
     background: linear-gradient(166.03deg, rgba(64, 186, 33, 0.81) -35%, rgba(230, 230, 230, 0.81) 120.05%), #868686;
     border-radius: 50%;
     align-self: center;
     justify-content: center;
     align-items: center;
-    margin: 20px;
+    margin: 1em;
 }
 
 .logo {
     position: relative;
-    width: 250px;
+    width: 15vw;
     height: auto;
     align-self: center;
-    left: 20px;
+    left: 1.5em;
 }

@@ -3,19 +3,19 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-bottom: 30px;
+    margin-bottom: 1em;
 }
 
 .Name {
     font-weight: 700;
-    font-size: 32px;
+    font-size: 2em;
     font-family: "Satoshi", sans-serif;
     text-align: center;
 }
 
 .email {
     font-weight: 500;
-    font-size: 20px;
+    font-size: 1.25em;
     font-family: "Satoshi", sans-serif;
     text-align: center;
 }
@@ -23,11 +23,11 @@
 .telegram {
     display: flex;
     flex-direction: row;
-    column-gap: 5px;
+    column-gap: 1em;
 }
 
 .telegramtag {
     font-weight: 700;
-    font-size: 24px;
+    font-size: 1.5em;
     font-family: "Satoshi", sans-serif;
 }

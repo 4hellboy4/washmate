@@ -10,7 +10,8 @@ import Signup from '@/app/components/Auth/Signup/Signup';
 import './app.css'
 import AuthInputField from "@/app/components/Auth/AuthInputField/AuthInputField";
 
-const App: React.FC = () => {Signup
+const App: React.FC = () => {
+  Signup
   return (
     <Router>
       <div className='layout'>
@@ -19,8 +20,8 @@ const App: React.FC = () => {Signup
           <Route path="/about" element={<About />} />
           <Route path="/" element={<Home />} />
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/signup" element={<Auth><Signup/></Auth>} />
-          <Route path="/login" element={<Auth><Login/></Auth>} />
+          <Route path="/signup" element={<Auth><Signup /></Auth>} />
+          <Route path="/login" element={<Auth><Login /></Auth>} />
         </Routes>
       </div>
     </Router>

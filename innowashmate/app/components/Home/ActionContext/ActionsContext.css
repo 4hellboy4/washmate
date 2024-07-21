@@ -1,22 +1,21 @@
 .actionscont {
-    position: relative;
     display: flex;
     flex-direction: column;
-    row-gap: 30px;
-    left: 475px;
-    margin-top: 30px;
+    row-gap: 3vh;
+    margin-top: 3vh;
     align-items: center;
 }
 
 .btnn {
     background-color: #40BA21;
-    width: 350px;
-    height: 100px;
+    width: auto;
+    height: auto;
     border-radius: 25px;
+    padding: 1em;
 }
 
 .building {
-    font-size: 64px;
+    font-size: 3rem;
     font-weight: 700;
     font-family: "Satoshi", sans-serif;
     color: #FFFFFF;
@@ -26,8 +25,8 @@
 .notification {
     display: flex;
     justify-content: center;
-    width: 100px;
-    height: 100px;
+    width: 7em;
+    height: 7em;
     background: linear-gradient(60deg, rgba(64, 186, 33, 1) 0%, rgba(229, 229, 229, 1) 100%);
     border-radius: 50%;
     transition: all 0.5s ease-in-out;
