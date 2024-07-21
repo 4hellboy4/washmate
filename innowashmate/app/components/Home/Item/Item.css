@@ -1,0 +1,143 @@
+/* Стиль для главного контейнера на главной странице */
+.home {
+    position: relative;
+    width: 70.313vw;
+    height: 83.333vh;
+    background-color: rgb(233, 233, 233);
+    top: 40px;
+    right: 30px;
+    border-radius: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Стиль для каждого блока бронирования на главной странице */
+.bookbox {
+    width: 350px;
+    height: 150px;
+    background-color: #FFFFFF;
+    border-radius: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+/* Стиль для контейнера с машиной и информацией о бронировании */
+.machinecont {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/* Стиль для названия машины */
+.machine {
+    font-family: "Satoshi", sans-serif;
+    font-weight: 700;
+    font-size: 24px;
+}
+
+/* Стиль для времени бронирования */
+.timeb {
+    font-family: "Satoshi", sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+/* Стиль для кнопки бронирования */
+.book-button {
+    background-color: #40BA21;
+    width: 350px;
+    height: 50px;
+    border-radius: 25px;
+    font-family: "Satoshi", sans-serif;
+    font-weight: 700;
+    color: #FFFFFF;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    text-transform: uppercase;
+}
+
+/* Стиль для контейнера деталей бронирования на странице Item */
+.item-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    background-color: rgb(233, 233, 233);
+    padding: 20px;
+}
+
+/* Стиль для деталей бронирования на странице Item */
+.item-details {
+    width: 600px;
+    background-color: #FFFFFF;
+    border-radius: 25px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Стиль для названия детали на странице Item */
+.item-title {
+    font-family: "Satoshi", sans-serif;
+    font-weight: 700;
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+/* Стиль для времени до начала бронирования на странице Item */
+.item-time-left {
+    font-family: "Satoshi", sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+/* Стиль для блока с информацией о месте */
+.item-info {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+/* Стиль для блока с местом и этажом */
+.item-location {
+    font-family: "Satoshi", sans-serif;
+    font-weight: 700;
+    font-size: 24px;
+}
+
+/* Стиль для блока с датами и временем */
+.item-dates {
+    font-family: "Satoshi", sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+}
+
+/* Стиль для кнопки отмены бронирования на странице Item */
+.cancel-button {
+    width: 300px;
+    height: 50px;
+    background-color: #BF0505;
+    font-size: 18px;
+    font-weight: 700;
+    color: #FFFFFF;
+    border-radius: 15px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
