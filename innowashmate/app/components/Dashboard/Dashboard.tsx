@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './dashboard.css';
 
 interface Schedule {
@@ -6,11 +7,21 @@ interface Schedule {
         [floor: string]: {
             [machine: string]: {
                 [day: string]: {
-                    [hour: string]: string; // this stores booked hours with the user's name
+                    [hour: string]: string;
                 };
             };
         };
     };
+}
+
+interface BookedMachine {
+    id: string;
+    name: string;
+    startTime: number;
+    endTime: number;
+    dorm: string;
+    floor: string;
+    day: string;
 }
 
 const initialSchedule: Schedule = {
@@ -49,6 +60,7 @@ const Dashboard: React.FC = () => {
     const [selectedDay, setSelectedDay] = useState("Today");
     const [time, setTime] = useState("00:00");
     const [schedule, setSchedule] = useState<Schedule>(initialSchedule);
+    const navigate = useNavigate();
 
     const handleDormChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         setSelectedDorm(event.target.value);
@@ -70,15 +82,92 @@ const Dashboard: React.FC = () => {
         setTime(event.target.value);
     };
 
+    const getTimeInMillis = (day: string, time: string) => {
+        const now = new Date();
+        const [hours, minutes] = time.split(':').map(Number);
+        let dayOffset = 0;
+        if (day === "Tomorrow") dayOffset = 1;
+        if (day === "Day After Tomorrow") dayOffset = 2;
+        const date = new Date(now.getFullYear(), now.getMonth(), now.getDate() + dayOffset, hours, minutes, 0, 0);
+        return date.getTime();
+    };
+
+    const countBookings = (floor: string) => {
+        const machines = schedule[selectedDorm][floor];
+        let washerCount = 0;
+        let dryerCount = 0;
+
+        Object.keys(machines).forEach(machine => {
+            Object.keys(machines[machine]).forEach(day => {
+                Object.keys(machines[machine][day]).forEach(hour => {
+                    if (machines[machine][day][hour]) {
+                        if (machine.includes('Washer')) {
+                            washerCount++;
+                        } else if (machine.includes('Dryer')) {
+                            dryerCount++;
+                        }
+                    }
+                });
+            });
+        });
+
+        return { washerCount, dryerCount };
+    };
+
     const handleBooking = () => {
+        const { washerCount, dryerCount } = countBookings(selectedFloor);
+
+        if (selectedMachine.includes('Washer') && washerCount >= 2) {
+            alert('You cannot book any more washers');
+            return;
+        }
+
+        if (selectedMachine.includes('Dryer') && dryerCount >= 2) {
+            alert('You cannot book any more dryers');
+            return;
+        }
+
         const newSchedule = { ...schedule };
         if (!newSchedule[selectedDorm]) newSchedule[selectedDorm] = {};
         if (!newSchedule[selectedDorm][selectedFloor]) newSchedule[selectedDorm][selectedFloor] = {};
         if (!newSchedule[selectedDorm][selectedFloor][selectedMachine]) newSchedule[selectedDorm][selectedFloor][selectedMachine] = {};
         if (!newSchedule[selectedDorm][selectedFloor][selectedMachine][selectedDay]) newSchedule[selectedDorm][selectedFloor][selectedMachine][selectedDay] = {};
 
-        newSchedule[selectedDorm][selectedFloor][selectedMachine][selectedDay][time] = "User Name"; // we will replace "User Name" with actual user data (after login we can getUserFirstName)
+        if (newSchedule[selectedDorm][selectedFloor][selectedMachine][selectedDay][time]) {
+            alert('This machine is already booked for the selected time');
+            return;
+        }
+
+        const startTime = getTimeInMillis(selectedDay, time);
+        if (startTime < Date.now()) {
+            alert('You cannot book a time in the past');
+            return;
+        }
+
+        newSchedule[selectedDorm][selectedFloor][selectedMachine][selectedDay][time] = "User Name";
         setSchedule(newSchedule);
+
+        const bookedMachines = Object.keys(newSchedule[selectedDorm][selectedFloor]).flatMap((machine) => {
+            return Object.keys(newSchedule[selectedDorm][selectedFloor][machine]).flatMap((day) => {
+                return Object.keys(newSchedule[selectedDorm][selectedFloor][machine][day]).map((time, index) => {
+                    const startTime = getTimeInMillis(day, time);
+                    const endTime = startTime + 3600000;
+                    return {
+                        id: `${selectedDorm}-${selectedFloor}-${machine}-${day}-${time}-${index + 1}`,
+                        name: machine,
+                        startTime,
+                        endTime,
+                        dorm: selectedDorm,
+                        floor: selectedFloor,
+                        day
+                    };
+                });
+            });
+        });
+
+        localStorage.setItem('bookedMachines', JSON.stringify(bookedMachines));
+        alert('Machine booked successfully');
+        navigate('/');
     };
 
     return (

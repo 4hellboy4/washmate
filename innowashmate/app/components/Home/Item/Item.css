@@ -1,17 +1,19 @@
+.home {
+    position: relative;
+    width: 70.313vw;
+    height: 83.333vh;
+    background-color: rgb(233, 233, 233);
+    top: 40px;
+    right: 30px;
+    border-radius: 20px;
+    display: flex;
+}
+
 .bookbox {
     width: 350px;
     height: 100px;
     background-color: #FFFFFF;
     border-radius: 25px;
-}
-
-.interval {
-    position: absolute;
-    font-family: "Satoshi", sans-serif;
-    font-weight: 700;
-    font-size: 20px;
-    left: 65px;
-    margin-top: 1px;
 }
 
 .clock {
@@ -37,4 +39,72 @@
     font-family: "Satoshi", sans-serif;
     font-weight: 700;
     font-size: 15px;
+}
+
+.btnn {
+    background-color: #40BA21;
+    width: 350px;
+    height: 100px;
+    border-radius: 25px;
+}
+
+.building {
+    font-size: 64px;
+    font-weight: 700;
+    font-family: "Satoshi", sans-serif;
+    color: #FFFFFF;
+    text-align: center;
+}
+
+.details {
+    display: flex;
+    flex-direction: row;
+    column-gap: 50px;
+    left: 90px;
+    top: 100px;
+}
+
+.dbox {
+    width: 800px;
+    height: 100px;
+    border-radius: 25px;
+    border: 3px solid black;
+    justify-content: center;
+    align-content: center;
+}
+
+.dboxcont {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+}
+
+.dboxt {
+    font-size: 36px;
+    font-weight: 700;
+    text-align: center;
+    font-family: "Satoshi", sans-serif;
+}
+
+.itemdetails {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+    row-gap: 30px;
+    left: 90px;
+    top: 100px;
+}
+
+.cancelbtn {
+    width: 300px;
+    height: 75px;
+    background-color: #BF0505;
+    font-size: 48px;
+    font-weight: 700;
+    text-align: center;
+    color: #FFFFFF;
+    border-radius: 15px;
+    cursor: pointer;
 }
