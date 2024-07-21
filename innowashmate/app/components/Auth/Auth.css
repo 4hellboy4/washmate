@@ -2,8 +2,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh; /* Full viewport height for centering vertically */
-    width: 100vw;  /* Full viewport width for centering horizontally */
+    /*height: 100vh; !* Full viewport height for centering vertically *!*/
+    width: 50vw;  /* Full viewport width for centering horizontally */
 }
 
 .auth_block {

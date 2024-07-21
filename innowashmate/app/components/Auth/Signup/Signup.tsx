@@ -55,6 +55,11 @@ const Signup: React.FC = () => {
         }
     };
 
+    const toLogin = () => {
+        console.log('/login')
+        navigate('/login');
+    }
+
     return (
         <div>
             <form onSubmit={handleSubmit}>
@@ -90,9 +95,9 @@ const Signup: React.FC = () => {
                 />
                 <button type="submit">Signup</button>
             </form>
-            <Link to={'/signup'}>
-                If already registered - Login.
-            </Link>
+            <button onClick={toLogin}>
+                I already registered - Login.
+            </button>
         </div>
     );
 }
