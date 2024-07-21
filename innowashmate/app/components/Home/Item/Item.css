@@ -1,3 +1,4 @@
+/* Стиль для главного контейнера на главной странице */
 .home {
     position: relative;
     width: 70.313vw;
@@ -7,104 +8,136 @@
     right: 30px;
     border-radius: 20px;
     display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
 }
 
+/* Стиль для каждого блока бронирования на главной странице */
 .bookbox {
     width: 350px;
-    height: 100px;
+    height: 150px;
     background-color: #FFFFFF;
     border-radius: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
 }
 
-.clock {
-    position: relative;
-    top: 8px;
-    left: 301px;
-}
-
+/* Стиль для контейнера с машиной и информацией о бронировании */
 .machinecont {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+    text-align: center;
 }
 
+/* Стиль для названия машины */
 .machine {
     font-family: "Satoshi", sans-serif;
     font-weight: 700;
-    font-size: 32px;
+    font-size: 24px;
 }
 
-.time {
+/* Стиль для времени бронирования */
+.timeb {
     font-family: "Satoshi", sans-serif;
-    font-weight: 700;
-    font-size: 15px;
+    font-weight: 500;
+    font-size: 14px;
 }
 
-.btnn {
+/* Стиль для кнопки бронирования */
+.book-button {
     background-color: #40BA21;
     width: 350px;
-    height: 100px;
+    height: 50px;
     border-radius: 25px;
-}
-
-.building {
-    font-size: 64px;
-    font-weight: 700;
     font-family: "Satoshi", sans-serif;
+    font-weight: 700;
     color: #FFFFFF;
-    text-align: center;
-}
-
-.details {
+    border: none;
+    cursor: pointer;
     display: flex;
-    flex-direction: row;
-    column-gap: 50px;
-    left: 90px;
-    top: 100px;
-}
-
-.dbox {
-    width: 800px;
-    height: 100px;
-    border-radius: 25px;
-    border: 3px solid black;
     justify-content: center;
-    align-content: center;
-}
-
-.dboxcont {
-    display: flex;
-    flex-direction: column;
-    row-gap: 20px;
-}
-
-.dboxt {
-    font-size: 36px;
-    font-weight: 700;
-    text-align: center;
-    font-family: "Satoshi", sans-serif;
-}
-
-.itemdetails {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-items: center;
     align-items: center;
-    row-gap: 30px;
-    left: 90px;
-    top: 100px;
+    margin-top: 20px;
+    text-transform: uppercase;
 }
 
-.cancelbtn {
-    width: 300px;
-    height: 75px;
-    background-color: #BF0505;
-    font-size: 48px;
-    font-weight: 700;
+/* Стиль для контейнера деталей бронирования на странице Item */
+.item-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    background-color: rgb(233, 233, 233);
+    padding: 20px;
+}
+
+/* Стиль для деталей бронирования на странице Item */
+.item-details {
+    width: 600px;
+    background-color: #FFFFFF;
+    border-radius: 25px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
+}
+
+/* Стиль для названия детали на странице Item */
+.item-title {
+    font-family: "Satoshi", sans-serif;
+    font-weight: 700;
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+/* Стиль для времени до начала бронирования на странице Item */
+.item-time-left {
+    font-family: "Satoshi", sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+/* Стиль для блока с информацией о месте */
+.item-info {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+/* Стиль для блока с местом и этажом */
+.item-location {
+    font-family: "Satoshi", sans-serif;
+    font-weight: 700;
+    font-size: 24px;
+}
+
+/* Стиль для блока с датами и временем */
+.item-dates {
+    font-family: "Satoshi", sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+}
+
+/* Стиль для кнопки отмены бронирования на странице Item */
+.cancel-button {
+    width: 300px;
+    height: 50px;
+    background-color: #BF0505;
+    font-size: 18px;
+    font-weight: 700;
     color: #FFFFFF;
     border-radius: 15px;
+    border: none;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

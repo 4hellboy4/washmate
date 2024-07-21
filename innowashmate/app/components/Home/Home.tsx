@@ -1,92 +1,105 @@
 import React, { useEffect, useState } from 'react';
-import Image from 'next/image';
 import { useNavigate } from 'react-router-dom';
-import clock from '../../assets/clock.svg';
-import notif from '../../assets/notfi.svg';
-import BookBtn from './BookBtn/BookBtn';
-import ActionsContext from "./ActionContext/ActionsContext";
+import { doc, getDoc, collection, getDocs } from 'firebase/firestore';
+import { FIRESTORE_DB, FIREBASE_AUTH } from '@/FirebaseConfig';
 import './home.css';
 
-interface BookedMachine {
+interface Schedule {
     id: string;
-    name: string;
-    startTime: number;
-    endTime: number;
-    dorm: string;
-    floor: string;
-    day: string;
+    selectedDay: string;
+    selectedMachine: string;
+    time: string;
+    userName: string;
 }
 
 const Home: React.FC = () => {
-    const [bookedMachines, setBookedMachines] = useState<BookedMachine[]>([]);
+    const [bookedSchedules, setBookedSchedules] = useState<Schedule[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [user, setUser] = useState<any>(null);
     const navigate = useNavigate();
 
     useEffect(() => {
-        const storedBookedMachines = JSON.parse(localStorage.getItem('bookedMachines') || '[]');
-        setBookedMachines(storedBookedMachines);
-        const interval = setInterval(() => {
-            const now = Date.now();
-            const updatedBookedMachines = storedBookedMachines.filter((machine: BookedMachine) => machine.endTime > now);
-            setBookedMachines(updatedBookedMachines);
-            localStorage.setItem('bookedMachines', JSON.stringify(updatedBookedMachines));
-        }, 1000);
+        const unsubscribe = FIREBASE_AUTH.onAuthStateChanged(async (currentUser) => {
+            if (currentUser) {
+                setUser(currentUser);
+                await fetchBookedSchedules(currentUser.uid);
+            } else {
+                navigate('/signup');
+            }
+        });
+        return () => unsubscribe();
+    }, [navigate]);
 
-        return () => clearInterval(interval);
-    }, []);
+    const fetchBookedSchedules = async (userId: string) => {
+        try {
+            const userDocRef = doc(FIRESTORE_DB, 'users', userId);
+            const userDocSnap = await getDoc(userDocRef);
 
-    const formatTime = (timestamp: number) => {
-        const date = new Date(timestamp);
-        return `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
-    };
+            if (!userDocSnap.exists()) {
+                console.error('No such user!');
+                return;
+            }
 
-    const formatTimeLeft = (startTime: number, endTime: number) => {
-        const now = Date.now();
-        if (now < startTime) {
-            const timeUntilStart = startTime - now;
-            const hours = Math.floor((timeUntilStart / (1000 * 60 * 60)) % 24);
-            const minutes = Math.floor((timeUntilStart / (1000 * 60)) % 60);
-            const seconds = Math.floor((timeUntilStart / 1000) % 60);
-            return `Starts in ${hours}h ${minutes}m ${seconds}s`;
+            const userName = userDocSnap.data()?.name;
+
+            // Извлечение всех документов из коллекции 'schedules'
+            const schedulesCollection = collection(FIRESTORE_DB, 'schedules');
+            const schedulesSnapshot = await getDocs(schedulesCollection);
+
+            const fetchedBookedSchedules: Schedule[] = [];
+
+            schedulesSnapshot.forEach((docSnap) => {
+                const scheduleData = docSnap.data() as { bookings: Schedule[] };
+
+                if (Array.isArray(scheduleData.bookings)) {
+                    scheduleData.bookings.forEach((booking) => {
+                        if (booking.userName === userName) {
+                            fetchedBookedSchedules.push(booking);
+                        }
+                    });
+                }
+            });
+
+            setBookedSchedules(fetchedBookedSchedules);
+        } catch (error) {
+            console.error('Error fetching booked schedules:', error);
+        } finally {
+            setLoading(false);
         }
-
-        const timeLeft = endTime - now;
-        if (timeLeft <= 0) return 'Time Expired';
-
-        const hours = Math.floor((timeLeft / (1000 * 60 * 60)) % 24);
-        const minutes = Math.floor((timeLeft / (1000 * 60)) % 60);
-        const seconds = Math.floor((timeLeft / 1000) % 60);
-
-        return `${hours}h ${minutes}m ${seconds}s`;
     };
 
-    const handleBookButtonClick = () => {
-        if (bookedMachines.length >= 4) {
-            alert('You cannot book any more machines');
-        } else {
-            navigate('/dashboard');
-        }
+    const formatTime = (time: string) => {
+        return `${time}`;
     };
 
-    const handleMachineClick = (machineId: string) => {
-        navigate(`/item/${machineId}`);
+    const handleSlotClick = (slotId: string) => {
+        navigate(`/item/${slotId}`);
     };
+
+    if (loading) {
+        return <div>Loading...</div>;
+    }
 
     return (
         <div className='home'>
             <div className='Bookings'>
-                {bookedMachines.map(machine => (
-                    <div key={machine.id} className='bookbox' onClick={() => handleMachineClick(machine.id)}>
-                        <p className='timeb'>{formatTime(machine.startTime)}</p>
-                        <Image src={clock} alt='clock' className='clock' />
-                        <div className='machinecont'>
-                            <h1 className='machine'>{machine.name}</h1>
-                            <p className='time'>Time Left: {formatTimeLeft(machine.startTime, machine.endTime)}</p>
+                {bookedSchedules.length > 0 ? (
+                    bookedSchedules.map(({ id, selectedDay, selectedMachine, time, userName }) => (
+                        <div key={id} className='bookbox' onClick={() => handleSlotClick(id)}>
+                            <p className='timeb'>{formatTime(time)}</p>
+                            <div className='machinecont'>
+                                <h1 className='machine'>{selectedMachine}</h1>
+                                <p className='user'>Booked by: {userName}</p>
+                                <p className='slot-id'>Slot ID: {id}</p> {/* Отображаем ID временного слота */}
+                                <p className='day'>Day: {selectedDay}</p>
+                            </div>
                         </div>
-                    </div>
-                ))}
-                <BookBtn onClick={handleBookButtonClick} /> {}
+                    ))
+                ) : (
+                    <p>No booked machines found.</p>
+                )}
+                <button className='book-button' onClick={() => navigate('/dashboard')}>BOOK</button>
             </div>
-            <ActionsContext /> {}
         </div>
     );
 };

@@ -1,67 +1,78 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, {useEffect, useState} from 'react';
+import {useNavigate} from 'react-router-dom';
+import {doc, getDoc, setDoc, updateDoc, collection, query, where, getDocs} from 'firebase/firestore';
+import {FIRESTORE_DB} from '@/FirebaseConfig';
+import {getAuth} from 'firebase/auth';
 import './dashboard.css';
 
 interface Schedule {
-    [dorm: string]: {
-        [floor: string]: {
-            [machine: string]: {
-                [day: string]: {
-                    [hour: string]: string;
-                };
-            };
-        };
-    };
-}
-
-interface BookedMachine {
     id: string;
-    name: string;
-    startTime: number;
-    endTime: number;
-    dorm: string;
-    floor: string;
-    day: string;
+    selectedDay: string;
+    selectedMachine: string;
+    time: string;
+    userName: string;
 }
 
-const initialSchedule: Schedule = {
-    "Dorm 7": {
-        "Floor 11": {
-            "Dryer 1": {
-                "Today": {},
-                "Tomorrow": {},
-                "Day After Tomorrow": {}
-            },
-            "Dryer 2": {
-                "Today": {},
-                "Tomorrow": {},
-                "Day After Tomorrow": {}
-            },
-            "Washer 1": {
-                "Today": {},
-                "Tomorrow": {},
-                "Day After Tomorrow": {}
-            },
-            "Washer 2": {
-                "Today": {},
-                "Tomorrow": {},
-                "Day After Tomorrow": {}
-            }
-        }
-    }
-};
+//
+// interface Machine {
+//     id: string;
+//     name: string;
+// }
 
-const hours = Array.from({ length: 24 }, (_, i) => `${i.toString().padStart(2, '0')}:00`);
+const hours = Array.from({length: 24}, (_, i) => `${i.toString().padStart(2, '0')}:00`);
 
 const Dashboard: React.FC = () => {
     const [selectedDorm, setSelectedDorm] = useState("Dorm 7");
     const [selectedFloor, setSelectedFloor] = useState("Floor 11");
-    const [selectedMachine, setSelectedMachine] = useState("Dryer 1");
+    const [selectedMachine, setSelectedMachine] = useState("Washer 1");
     const [selectedDay, setSelectedDay] = useState("Today");
     const [time, setTime] = useState("00:00");
-    const [schedule, setSchedule] = useState<Schedule>(initialSchedule);
+    const [schedule, setSchedule] = useState<Schedule[]>([]);
+    const [userName, setUserName] = useState("");
     const navigate = useNavigate();
 
+    // fetch USERNAME
+    useEffect(() => {
+        const fetchUserName = async () => {
+            const auth = getAuth();
+            const user = auth.currentUser;
+            if (user) {
+                const userRef = doc(FIRESTORE_DB, 'users', user.uid);
+                const userSnap = await getDoc(userRef);
+                if (userSnap.exists()) {
+                    setUserName(userSnap.data().name);
+                }
+            }
+        };
+        fetchUserName();
+    }, []);
+
+    // fetch schedules by dorm, floor, machine type
+    useEffect(() => {
+        const fetchSchedule = async () => {
+            const docRef = doc(FIRESTORE_DB, 'schedules', `${selectedDorm}-${selectedFloor}`);
+            const docSnap = await getDoc(docRef);
+
+            if (docSnap.exists()) {
+                console.log('Document Data:', docSnap.data()); // Посмотрите, что возвращает Firestore
+
+                const data = docSnap.data();
+                const bookings = data?.["bookings"] as Schedule[]; // Получаем массив бронирований
+
+                console.log('Fetched Bookings:', bookings); // Посмотрите, что вы получаете
+
+                if (Array.isArray(bookings)) {
+                    setSchedule(bookings); // Устанавливаем массив бронирований в состояние
+                } else {
+                    setSchedule([]); // Если данных нет, устанавливаем пустой массив
+                }
+            } else {
+                setSchedule([]); // Если документ не существует, устанавливаем пустой массив
+            }
+        };
+
+        fetchSchedule();
+    }, [selectedDorm, selectedFloor]);
     const handleDormChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         setSelectedDorm(event.target.value);
     };
@@ -92,51 +103,8 @@ const Dashboard: React.FC = () => {
         return date.getTime();
     };
 
-    const countBookings = (floor: string) => {
-        const machines = schedule[selectedDorm][floor];
-        let washerCount = 0;
-        let dryerCount = 0;
 
-        Object.keys(machines).forEach(machine => {
-            Object.keys(machines[machine]).forEach(day => {
-                Object.keys(machines[machine][day]).forEach(hour => {
-                    if (machines[machine][day][hour]) {
-                        if (machine.includes('Washer')) {
-                            washerCount++;
-                        } else if (machine.includes('Dryer')) {
-                            dryerCount++;
-                        }
-                    }
-                });
-            });
-        });
-
-        return { washerCount, dryerCount };
-    };
-
-    const handleBooking = () => {
-        const { washerCount, dryerCount } = countBookings(selectedFloor);
-
-        if (selectedMachine.includes('Washer') && washerCount >= 2) {
-            alert('You cannot book any more washers');
-            return;
-        }
-
-        if (selectedMachine.includes('Dryer') && dryerCount >= 2) {
-            alert('You cannot book any more dryers');
-            return;
-        }
-
-        const newSchedule = { ...schedule };
-        if (!newSchedule[selectedDorm]) newSchedule[selectedDorm] = {};
-        if (!newSchedule[selectedDorm][selectedFloor]) newSchedule[selectedDorm][selectedFloor] = {};
-        if (!newSchedule[selectedDorm][selectedFloor][selectedMachine]) newSchedule[selectedDorm][selectedFloor][selectedMachine] = {};
-        if (!newSchedule[selectedDorm][selectedFloor][selectedMachine][selectedDay]) newSchedule[selectedDorm][selectedFloor][selectedMachine][selectedDay] = {};
-
-        if (newSchedule[selectedDorm][selectedFloor][selectedMachine][selectedDay][time]) {
-            alert('This machine is already booked for the selected time');
-            return;
-        }
+    const handleBooking = async () => {
 
         const startTime = getTimeInMillis(selectedDay, time);
         if (startTime < Date.now()) {
@@ -144,28 +112,38 @@ const Dashboard: React.FC = () => {
             return;
         }
 
-        newSchedule[selectedDorm][selectedFloor][selectedMachine][selectedDay][time] = "User Name";
-        setSchedule(newSchedule);
+        const docRef = doc(FIRESTORE_DB, 'schedules', `${selectedDorm}-${selectedFloor}`);
+        const slotId = `${selectedDorm}-${selectedFloor}-${selectedDay}-${time}`;
 
-        const bookedMachines = Object.keys(newSchedule[selectedDorm][selectedFloor]).flatMap((machine) => {
-            return Object.keys(newSchedule[selectedDorm][selectedFloor][machine]).flatMap((day) => {
-                return Object.keys(newSchedule[selectedDorm][selectedFloor][machine][day]).map((time, index) => {
-                    const startTime = getTimeInMillis(day, time);
-                    const endTime = startTime + 3600000;
-                    return {
-                        id: `${selectedDorm}-${selectedFloor}-${machine}-${day}-${time}-${index + 1}`,
-                        name: machine,
-                        startTime,
-                        endTime,
-                        dorm: selectedDorm,
-                        floor: selectedFloor,
-                        day
-                    };
-                });
+        const bookingData = {
+            selectedDay,
+            time,
+            userName,
+            selectedMachine,
+            id: slotId // Уникальный ID для временного слота
+        };
+
+        const docSnap = await getDoc(docRef);
+
+        if (!docSnap.exists()) {
+            // Если документа нет, создаем его с первым бронированием
+            await setDoc(docRef, {
+                bookings: [bookingData] // Создаем массив с первым бронированием
             });
-        });
+        } else {
+            // Если документ существует, обновляем его
+            const data = docSnap.data();
+            const existingBookings = data?.bookings || [];
 
-        localStorage.setItem('bookedMachines', JSON.stringify(bookedMachines));
+            // Проверяем, есть ли уже бронирование на это время и день
+            const updatedBookings = existingBookings.filter(booking => booking.id !== slotId);
+            updatedBookings.push(bookingData);
+
+            await updateDoc(docRef, {
+                bookings: updatedBookings // Обновляем массив бронирований
+            });
+        }
+
         alert('Machine booked successfully');
         navigate('/');
     };
@@ -179,52 +157,70 @@ const Dashboard: React.FC = () => {
                         <option value="Dorm 7">Dorm 7</option>
                     </select>
                     <select name="floor" className='dchoice' onChange={handleFloorChange} value={selectedFloor}>
-                        {Array.from({ length: 13 }, (_, i) => (
+                        {Array.from({length: 13}, (_, i) => (
                             <option key={i} value={`Floor ${i + 1}`}>{`Floor ${i + 1}`}</option>
                         ))}
                     </select>
                 </div>
                 <div className='radios'>
                     <div className='radiostyle'>
-                        <input type="radio" id="Washer 1" name='machine' onChange={handleMachineChange} />
+                        <input type="radio" id="Washer 1" name='machine' onChange={handleMachineChange}
+                               checked={selectedMachine === "Washer 1"}/>
                         <label htmlFor="Washer 1">Washer 1</label>
                     </div>
                     <div className='radiostyle'>
-                        <input type="radio" id="Washer 2" name='machine' onChange={handleMachineChange} />
+                        <input type="radio" id="Washer 2" name='machine' onChange={handleMachineChange}
+                               checked={selectedMachine === "Washer 2"}/>
                         <label htmlFor="Washer 2">Washer 2</label>
                     </div>
                     <div className='radiostyle'>
-                        <input type="radio" id="Dryer 1" name='machine' onChange={handleMachineChange} />
+                        <input type="radio" id="Dryer 1" name='machine' onChange={handleMachineChange}
+                               checked={selectedMachine === "Dryer 1"}/>
                         <label htmlFor="Dryer 1">Dryer 1</label>
                     </div>
                     <div className='radiostyle'>
-                        <input type="radio" id="Dryer 2" name='machine' onChange={handleMachineChange} />
+                        <input type="radio" id="Dryer 2" name='machine' onChange={handleMachineChange}
+                               checked={selectedMachine === "Dryer 2"}/>
                         <label htmlFor="Dryer 2">Dryer 2</label>
                     </div>
                 </div>
                 <div className='schedule'>
                     <div className='days'>
-                        <div className={`daystyle ${selectedDay === "Today" ? "selected" : ""}`} onClick={() => handleDayChange("Today")}>
+                        <div className={`daystyle ${selectedDay === "Today" ? "selected" : ""}`}
+                             onClick={() => handleDayChange("Today")}>
                             <h1>Today</h1>
                         </div>
-                        <div className={`daystyle ${selectedDay === "Tomorrow" ? "selected" : ""}`} onClick={() => handleDayChange("Tomorrow")}>
+                        <div className={`daystyle ${selectedDay === "Tomorrow" ? "selected" : ""}`}
+                             onClick={() => handleDayChange("Tomorrow")}>
                             <h1>Tomorrow</h1>
                         </div>
-                        <div className={`daystyle ${selectedDay === "Day After Tomorrow" ? "selected" : ""}`} onClick={() => handleDayChange("Day After Tomorrow")}>
+                        <div className={`daystyle ${selectedDay === "Day After Tomorrow" ? "selected" : ""}`}
+                             onClick={() => handleDayChange("Day After Tomorrow")}>
                             <h1 className='longday'>Day After Tomorrow</h1>
                         </div>
                     </div>
                     <div className='schedule-table'>
-                        {hours.map((hour) => (
-                            <div key={hour} className='schedule-row'>
-                                <div className='time-slot'>{hour}</div>
-                                <div className='booking-info'>
-                                    {schedule[selectedDorm] && schedule[selectedDorm][selectedFloor] && schedule[selectedDorm][selectedFloor][selectedMachine] && schedule[selectedDorm][selectedFloor][selectedMachine][selectedDay] && schedule[selectedDorm][selectedFloor][selectedMachine][selectedDay][hour] ?
-                                        schedule[selectedDorm][selectedFloor][selectedMachine][selectedDay][hour] : ""}
+                        {hours.map((hour) => {
+                            // Фильтруем бронирования для текущего дня и текущего часа
+                            const bookingForHour = schedule.find(booking => booking.selectedDay === selectedDay && booking.time === hour);
+                            return (
+                                <div key={hour} className='schedule-row'>
+                                    <div className='time-slot'>{hour}</div>
+                                    <div className='booking-info'>
+                                        {bookingForHour ? (
+                                            <>
+                                                {bookingForHour.userName}
+                                                {bookingForHour.id && ` (ID: ${bookingForHour.id})`}
+                                            </>
+                                        ) : (
+                                            "Available"
+                                        )}
+                                    </div>
                                 </div>
-                            </div>
-                        ))}
+                            );
+                        })}
                     </div>
+
                 </div>
                 <div className='time-selection'>
                     <select className='time-choice' onChange={handleTimeChange} value={time}>

@@ -10,8 +10,10 @@ import Signup from '@/app/components/Auth/Signup/Signup';
 import Item from "@/app/components/Home/Item/Item";
 import './app.css'
 import AuthInputField from "@/app/components/Auth/AuthInputField/AuthInputField";
+import {useRouter} from "next/router";
 
-const App: React.FC = () => {Signup
+const App: React.FC = () => {
+  const router = useRouter;
   return (
     <Router>
       <div className='layout'>
