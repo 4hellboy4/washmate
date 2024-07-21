@@ -13,6 +13,7 @@ import AuthInputField from "@/app/components/Auth/AuthInputField/AuthInputField"
 import {useRouter} from "next/router";
 
 const App: React.FC = () => {
+
   const router = useRouter;
   return (
     <Router>

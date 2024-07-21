@@ -11,7 +11,6 @@ interface Schedule {
     time: string;
     userName: string;
 }
-
 const Item: React.FC = () => {
     const { id } = useParams<{ id: string }>();
     const navigate = useNavigate();

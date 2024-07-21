@@ -1,11 +1,8 @@
 .bookbtn {
-    position: relative;
-    width: 300px;
-    height: 75px;
+    width: 14vw;
+    height: auto;
     background-color: #40BA21;
     border-radius: 25px;
-    margin: 30px;
-    top: 25px;
     transition: all 0.5s ease-out;
     cursor: pointer;
 }
@@ -17,7 +14,7 @@
 .book {
     font-family: "Satoshi", sans-serif;
     font-weight: 700;
-    font-size: 48px;
+    font-size: 3rem;
     color: #FFFFFF;
     text-align: center;
 }
