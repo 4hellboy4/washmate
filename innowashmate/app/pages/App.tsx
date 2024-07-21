@@ -10,7 +10,7 @@ import Signup from '@/app/components/Auth/Signup/Signup';
 import Item from "@/app/components/Home/Item/Item";
 import './app.css'
 import AuthInputField from "@/app/components/Auth/AuthInputField/AuthInputField";
-import {useRouter} from "next/router";
+import { useRouter } from "next/router";
 
 const App: React.FC = () => {
 
@@ -24,8 +24,8 @@ const App: React.FC = () => {
           <Route path="/" element={<Home />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/item/:id" element={<Item />} />
-          <Route path="/signup" element={<Auth><Signup/></Auth>} />
-          <Route path="/login" element={<Auth><Login/></Auth>} />
+          <Route path="/signup" element={<Auth><Signup /></Auth>} />
+          <Route path="/login" element={<Auth><Login /></Auth>} />
         </Routes>
       </div>
     </Router>

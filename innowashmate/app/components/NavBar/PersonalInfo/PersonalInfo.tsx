@@ -6,6 +6,7 @@ import { FIREBASE_AUTH, FIRESTORE_DB } from "@/FirebaseConfig";
 import { onAuthStateChanged } from "firebase/auth";
 import telegram from "@/app/assets/telegram.svg";
 import './PersonalInfo.css';
+import ReactLoading from 'react-loading';
 
 interface UserInfo {
     name: string;
@@ -41,7 +42,9 @@ const PersonalInfo: React.FC = () => {
     }, [navigate]);
 
     if (!userInfo) {
-        return <div>Loading...</div>;
+        return <div className='centerloading'>
+            <ReactLoading type='spin' color='#000' height={50} width={50} />
+        </div>;
     }
 
     return (

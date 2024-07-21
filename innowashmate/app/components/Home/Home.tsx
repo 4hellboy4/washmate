@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { doc, getDoc, collection, getDocs } from 'firebase/firestore';
 import { FIRESTORE_DB, FIREBASE_AUTH } from '@/FirebaseConfig';
 import './home.css';
+import ReactLoading from 'react-loading';
 
 interface Schedule {
     id: string;
@@ -77,7 +78,11 @@ const Home: React.FC = () => {
     };
 
     if (loading) {
-        return <div>Loading...</div>;
+        return <div className='home'>
+            <div className='centerloading'>
+                <ReactLoading type='spin' color='#000' height={225} width={225} />
+            </div>
+        </div>;
     }
 
     return (
@@ -86,8 +91,8 @@ const Home: React.FC = () => {
                 {bookedSchedules.length > 0 ? (
                     bookedSchedules.map(({ id, selectedDay, selectedMachine, time, userName }) => (
                         <div key={id} className='bookbox' onClick={() => handleSlotClick(id)}>
-                            <p className='timeb'>{formatTime(time)}</p>
                             <div className='machinecont'>
+                                <p className='timeb'>{formatTime(time)}</p>
                                 <h1 className='machine'>{selectedMachine}</h1>
                                 <p className='user'>Booked by: {userName}</p>
                                 <p className='slot-id'>Slot ID: {id}</p> {/* Отображаем ID временного слота */}
@@ -98,7 +103,7 @@ const Home: React.FC = () => {
                 ) : (
                     <p>No booked machines found.</p>
                 )}
-                <button className='book-button' onClick={() => navigate('/dashboard')}>BOOK</button>
+                <button className='bookbtn' onClick={() => navigate('/dashboard')}>BOOK</button>
             </div>
         </div>
     );

@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { doc, getDoc, deleteDoc } from 'firebase/firestore';
 import { FIRESTORE_DB } from '@/FirebaseConfig';
 import './Item.css';
+import ReactLoading from 'react-loading';
 
 interface Schedule {
     id: string;
@@ -109,7 +110,11 @@ const Item: React.FC = () => {
     };
 
     if (loading) {
-        return <div>Loading...</div>;
+        return <div className='home'>
+            <div className='centerloading'>
+                <ReactLoading type='spin' color='#000' height={225} width={225} />
+            </div>
+        </div>;
     }
 
     if (!machineDetails) {
@@ -117,7 +122,7 @@ const Item: React.FC = () => {
     }
 
     return (
-        <div className='item-container'>
+        <div className='home'>
             <div className='item-details'>
                 <h1 className='item-title'>{machineDetails.selectedMachine}</h1>
                 <p className='item-time-left'>Time Left: {formatTimeLeft(machineDetails.time)}</p>

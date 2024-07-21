@@ -23,7 +23,7 @@ const NavBar: React.FC = () => {
         <div className='picemoji'>
           <Image src={smile} alt='smiley Face'></Image>
         </div>
-        <PersonalInfo/>
+        <PersonalInfo />
         <div className='pages'>
           <Link to={"/"} >
             <div className='button'>

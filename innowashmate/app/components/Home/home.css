@@ -1,34 +1,31 @@
 .home {
-    position: relative;
     width: 71vw;
     height: auto;
+    min-height: 60vh;
     background-color: rgb(233, 233, 233);
-    top: 40px;
-    right: 30px;
     border-radius: 20px;
     display: flex;
     justify-content: center;
     align-content: center;
-    column-gap: 25em;
-    padding: 3em;
 }
 
 .Bookings {
     width: 24vw;
-    height: 74vh;
+    height: auto;
     background-color: #D9D9D9;
     border-radius: 25px;
     align-self: center;
     display: flex;
     flex-direction: column;
-    row-gap: 1.25em;
     justify-content: center;
     align-items: center;
+    row-gap: 2em;
+    padding: 1em;
 }
 
 .bookbox {
-    width: 350px;
-    height: 100px;
+    width: 50vw;
+    height: 20vh;
     background-color: #FFFFFF;
     border-radius: 25px;
 }
@@ -49,88 +46,31 @@
 .machine {
     font-family: "Satoshi", sans-serif;
     font-weight: 700;
-    font-size: 32px;
+    font-size: 1.5em;
 }
 
-.time {
-    font-family: "Satoshi", sans-serif;
-    font-weight: 700;
-    font-size: 15px;
-}
 
 .timeb {
-    position: absolute;
     font-family: "Satoshi", sans-serif;
     font-weight: 700;
-    font-size: 20px;
-    left: 65px;
-    margin-top: 1px;
+    font-size: 1em;
 }
 
 .bookbtn {
-    position: relative;
-    width: 300px;
-    height: 75px;
+    width: 10vw;
+    height: auto;
     background-color: #40BA21;
     border-radius: 25px;
-    margin: 30px;
-    top: 25px;
     transition: all 0.5s ease-out;
     cursor: pointer;
+    font-family: "Satoshi", sans-serif;
+    font-weight: 700;
+    font-size: 1.5em;
+    color: #FFFFFF;
+    text-align: center;
+    padding: 0.25em;
 }
 
 .bookbtn:hover {
     background-color: #64c04d;
-}
-
-.book {
-    font-family: "Satoshi", sans-serif;
-    font-weight: 700;
-    font-size: 48px;
-    color: #FFFFFF;
-    text-align: center;
-}
-
-.actionscont {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    row-gap: 30px;
-    left: 475px;
-    margin-top: 30px;
-    align-items: center;
-}
-
-.btnn {
-    background-color: #40BA21;
-    width: 350px;
-    height: 100px;
-    border-radius: 25px;
-}
-
-
-
-.building {
-    font-size: 64px;
-    font-weight: 700;
-    font-family: "Satoshi", sans-serif;
-    color: #FFFFFF;
-    text-align: center;
-}
-
-.notification {
-    display: flex;
-    justify-content: center;
-    width: 100px;
-    height: 100px;
-    background: linear-gradient(60deg, rgba(64, 186, 33, 1) 0%, rgba(229, 229, 229, 1) 100%);
-    border-radius: 50%;
-    transition: all 0.5s ease-in-out;
-    transition: transform 1s;
-    cursor: pointer;
-}
-
-.notification:hover {
-    background: linear-gradient(100deg, rgba(236, 0, 0, 1) 0%, rgba(229, 229, 229, 1) 100%);
-    transform: rotate(360deg);
 }
