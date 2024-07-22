@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   doc,
   getDoc,
@@ -9,10 +9,10 @@ import {
   query,
   where,
   getDocs,
-} from "firebase/firestore";
-import { FIRESTORE_DB } from "@/FirebaseConfig";
-import { getAuth } from "firebase/auth";
-import "./dashboard.css";
+} from 'firebase/firestore';
+import { FIRESTORE_DB } from '@/FirebaseConfig';
+import { getAuth } from 'firebase/auth';
+import './dashboard.css';
 
 interface Schedule {
   id: string;
@@ -30,17 +30,17 @@ interface Schedule {
 
 const hours = Array.from(
   { length: 24 },
-  (_, i) => `${i.toString().padStart(2, "0")}:00`,
+  (_, i) => `${i.toString().padStart(2, '0')}:00`,
 );
 
 const Dashboard: React.FC = () => {
-  const [selectedDorm, setSelectedDorm] = useState("Dorm 7");
-  const [selectedFloor, setSelectedFloor] = useState("Floor 11");
-  const [selectedMachine, setSelectedMachine] = useState("Washer 1");
-  const [selectedDay, setSelectedDay] = useState("Today");
-  const [time, setTime] = useState("00:00");
+  const [selectedDorm, setSelectedDorm] = useState('Dorm 7');
+  const [selectedFloor, setSelectedFloor] = useState('Floor 11');
+  const [selectedMachine, setSelectedMachine] = useState('Washer 1');
+  const [selectedDay, setSelectedDay] = useState('Today');
+  const [time, setTime] = useState('00:00');
   const [schedule, setSchedule] = useState<Schedule[]>([]);
-  const [userName, setUserName] = useState("");
+  const [userName, setUserName] = useState('');
   const navigate = useNavigate();
 
   // fetch USERNAME
@@ -49,7 +49,7 @@ const Dashboard: React.FC = () => {
       const auth = getAuth();
       const user = auth.currentUser;
       if (user) {
-        const userRef = doc(FIRESTORE_DB, "users", user.uid);
+        const userRef = doc(FIRESTORE_DB, 'users', user.uid);
         const userSnap = await getDoc(userRef);
         if (userSnap.exists()) {
           setUserName(userSnap.data().name);
@@ -64,18 +64,18 @@ const Dashboard: React.FC = () => {
     const fetchSchedule = async () => {
       const docRef = doc(
         FIRESTORE_DB,
-        "schedules",
+        'schedules',
         `${selectedDorm}-${selectedFloor}`,
       );
       const docSnap = await getDoc(docRef);
 
       if (docSnap.exists()) {
-        console.log("Document Data:", docSnap.data()); // Посмотрите, что возвращает Firestore
+        console.log('Document Data:', docSnap.data()); // Посмотрите, что возвращает Firestore
 
         const data = docSnap.data();
-        const bookings = data?.["bookings"] as Schedule[]; // Получаем массив бронирований
+        const bookings = data?.['bookings'] as Schedule[]; // Получаем массив бронирований
 
-        console.log("Fetched Bookings:", bookings); // Посмотрите, что вы получаете
+        console.log('Fetched Bookings:', bookings); // Посмотрите, что вы получаете
 
         if (Array.isArray(bookings)) {
           setSchedule(bookings); // Устанавливаем массив бронирований в состояние
@@ -111,10 +111,10 @@ const Dashboard: React.FC = () => {
 
   const getTimeInMillis = (day: string, time: string) => {
     const now = new Date();
-    const [hours, minutes] = time.split(":").map(Number);
+    const [hours, minutes] = time.split(':').map(Number);
     let dayOffset = 0;
-    if (day === "Tomorrow") dayOffset = 1;
-    if (day === "Day After Tomorrow") dayOffset = 2;
+    if (day === 'Tomorrow') dayOffset = 1;
+    if (day === 'Day After Tomorrow') dayOffset = 2;
     const date = new Date(
       now.getFullYear(),
       now.getMonth(),
@@ -130,13 +130,13 @@ const Dashboard: React.FC = () => {
   const handleBooking = async () => {
     const startTime = getTimeInMillis(selectedDay, time);
     if (startTime < Date.now()) {
-      alert("You cannot book a time in the past");
+      alert('You cannot book a time in the past');
       return;
     }
 
     const docRef = doc(
       FIRESTORE_DB,
-      "schedules",
+      'schedules',
       `${selectedDorm}-${selectedFloor}`,
     );
     const slotId = `${selectedDorm}-${selectedFloor}-${selectedDay}-${time}`;
@@ -172,8 +172,8 @@ const Dashboard: React.FC = () => {
       });
     }
 
-    alert("Machine booked successfully");
-    navigate("/");
+    alert('Machine booked successfully');
+    navigate('/');
   };
 
   return (
@@ -210,7 +210,7 @@ const Dashboard: React.FC = () => {
               id="Washer 1"
               name="machine"
               onChange={handleMachineChange}
-              checked={selectedMachine === "Washer 1"}
+              checked={selectedMachine === 'Washer 1'}
             />
             <label htmlFor="Washer 1">Washer 1</label>
           </div>
@@ -220,7 +220,7 @@ const Dashboard: React.FC = () => {
               id="Washer 2"
               name="machine"
               onChange={handleMachineChange}
-              checked={selectedMachine === "Washer 2"}
+              checked={selectedMachine === 'Washer 2'}
             />
             <label htmlFor="Washer 2">Washer 2</label>
           </div>
@@ -230,7 +230,7 @@ const Dashboard: React.FC = () => {
               id="Dryer 1"
               name="machine"
               onChange={handleMachineChange}
-              checked={selectedMachine === "Dryer 1"}
+              checked={selectedMachine === 'Dryer 1'}
             />
             <label htmlFor="Dryer 1">Dryer 1</label>
           </div>
@@ -240,7 +240,7 @@ const Dashboard: React.FC = () => {
               id="Dryer 2"
               name="machine"
               onChange={handleMachineChange}
-              checked={selectedMachine === "Dryer 2"}
+              checked={selectedMachine === 'Dryer 2'}
             />
             <label htmlFor="Dryer 2">Dryer 2</label>
           </div>
@@ -248,20 +248,20 @@ const Dashboard: React.FC = () => {
         <div className="schedule">
           <div className="days">
             <div
-              className={`daystyle ${selectedDay === "Today" ? "selected" : ""}`}
-              onClick={() => handleDayChange("Today")}
+              className={`daystyle ${selectedDay === 'Today' ? 'selected' : ''}`}
+              onClick={() => handleDayChange('Today')}
             >
               <h1>Today</h1>
             </div>
             <div
-              className={`daystyle ${selectedDay === "Tomorrow" ? "selected" : ""}`}
-              onClick={() => handleDayChange("Tomorrow")}
+              className={`daystyle ${selectedDay === 'Tomorrow' ? 'selected' : ''}`}
+              onClick={() => handleDayChange('Tomorrow')}
             >
               <h1>Tomorrow</h1>
             </div>
             <div
-              className={`daystyle ${selectedDay === "Day After Tomorrow" ? "selected" : ""}`}
-              onClick={() => handleDayChange("Day After Tomorrow")}
+              className={`daystyle ${selectedDay === 'Day After Tomorrow' ? 'selected' : ''}`}
+              onClick={() => handleDayChange('Day After Tomorrow')}
             >
               <h1 className="longday">Day After Tomorrow</h1>
             </div>
@@ -283,7 +283,7 @@ const Dashboard: React.FC = () => {
                         {bookingForHour.id && ` (ID: ${bookingForHour.id})`}
                       </>
                     ) : (
-                      "Available"
+                      'Available'
                     )}
                   </div>
                 </div>

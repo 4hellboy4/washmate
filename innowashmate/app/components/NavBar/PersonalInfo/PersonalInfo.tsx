@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import Image from "next/image"; // You can still use Image from next/image if you need its optimization features
-import { getDoc, doc } from "firebase/firestore";
-import { FIREBASE_AUTH, FIRESTORE_DB } from "@/FirebaseConfig";
-import { onAuthStateChanged } from "firebase/auth";
-import telegram from "@/app/assets/telegram.svg";
-import "./PersonalInfo.css";
-import ReactLoading from "react-loading";
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Image from 'next/image'; // You can still use Image from next/image if you need its optimization features
+import { getDoc, doc } from 'firebase/firestore';
+import { FIREBASE_AUTH, FIRESTORE_DB } from '@/FirebaseConfig';
+import { onAuthStateChanged } from 'firebase/auth';
+import telegram from '@/app/assets/telegram.svg';
+import './PersonalInfo.css';
+import ReactLoading from 'react-loading';
 
 interface UserInfo {
   name: string;
@@ -20,13 +20,13 @@ const PersonalInfo: React.FC = () => {
 
   useEffect(() => {
     const fetchUserInfo = async (userId: string) => {
-      const userDoc = doc(FIRESTORE_DB, "users", userId);
+      const userDoc = doc(FIRESTORE_DB, 'users', userId);
       const docSnap = await getDoc(userDoc);
 
       if (docSnap.exists()) {
         setUserInfo(docSnap.data() as UserInfo);
       } else {
-        navigate("/signup");
+        navigate('/signup');
       }
     };
 
@@ -34,7 +34,7 @@ const PersonalInfo: React.FC = () => {
       if (user) {
         fetchUserInfo(user.uid);
       } else {
-        navigate("/signup");
+        navigate('/signup');
       }
     });
 

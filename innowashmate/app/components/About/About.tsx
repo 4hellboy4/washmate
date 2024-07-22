@@ -1,8 +1,8 @@
-import React from "react";
-import Image from "next/image";
-import "./about.css";
-import { Link } from "react-router-dom";
-import Home from "../Home/Home";
+import React from 'react';
+import Image from 'next/image';
+import './about.css';
+import { Link } from 'react-router-dom';
+import Home from '../Home/Home';
 
 const About: React.FC = () => {
   return (
@@ -16,7 +16,7 @@ const About: React.FC = () => {
           Here you can Book and see the schedule of the laundry room throughout
           of all Innopolis Universities Dorms
         </p>
-        <Link to={"/"}>
+        <Link to={'/'}>
           <div className="bookbtna">
             <h1 className="booka">BOOK</h1>
           </div>

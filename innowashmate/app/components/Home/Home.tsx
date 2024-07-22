@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { doc, getDoc, collection, getDocs } from "firebase/firestore";
-import { FIRESTORE_DB, FIREBASE_AUTH } from "@/FirebaseConfig";
-import "./home.css";
-import ReactLoading from "react-loading";
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { doc, getDoc, collection, getDocs } from 'firebase/firestore';
+import { FIRESTORE_DB, FIREBASE_AUTH } from '@/FirebaseConfig';
+import './home.css';
+import ReactLoading from 'react-loading';
 
 interface Schedule {
   id: string;
@@ -26,7 +26,7 @@ const Home: React.FC = () => {
           setUser(currentUser);
           await fetchBookedSchedules(currentUser.uid);
         } else {
-          navigate("/signup");
+          navigate('/signup');
         }
       },
     );
@@ -35,18 +35,18 @@ const Home: React.FC = () => {
 
   const fetchBookedSchedules = async (userId: string) => {
     try {
-      const userDocRef = doc(FIRESTORE_DB, "users", userId);
+      const userDocRef = doc(FIRESTORE_DB, 'users', userId);
       const userDocSnap = await getDoc(userDocRef);
 
       if (!userDocSnap.exists()) {
-        console.error("No such user!");
+        console.error('No such user!');
         return;
       }
 
       const userName = userDocSnap.data()?.name;
 
       // Извлечение всех документов из коллекции 'schedules'
-      const schedulesCollection = collection(FIRESTORE_DB, "schedules");
+      const schedulesCollection = collection(FIRESTORE_DB, 'schedules');
       const schedulesSnapshot = await getDocs(schedulesCollection);
 
       const fetchedBookedSchedules: Schedule[] = [];
@@ -65,7 +65,7 @@ const Home: React.FC = () => {
 
       setBookedSchedules(fetchedBookedSchedules);
     } catch (error) {
-      console.error("Error fetching booked schedules:", error);
+      console.error('Error fetching booked schedules:', error);
     } finally {
       setLoading(false);
     }
@@ -104,7 +104,7 @@ const Home: React.FC = () => {
                   <p className="timeb">{formatTime(time)}</p>
                   <h1 className="machine">{selectedMachine}</h1>
                   <p className="user">Booked by: {userName}</p>
-                  <p className="slot-id">Slot ID: {id}</p>{" "}
+                  <p className="slot-id">Slot ID: {id}</p>{' '}
                   {/* Отображаем ID временного слота */}
                   <p className="day">Day: {selectedDay}</p>
                 </div>
@@ -114,7 +114,7 @@ const Home: React.FC = () => {
         ) : (
           <p>No booked machines found.</p>
         )}
-        <button className="bookbtn" onClick={() => navigate("/dashboard")}>
+        <button className="bookbtn" onClick={() => navigate('/dashboard')}>
           BOOK
         </button>
       </div>

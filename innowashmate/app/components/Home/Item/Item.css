@@ -21,7 +21,7 @@
 }
 
 .interval {
-  font-family: "Satoshi", sans-serif;
+  font-family: 'Satoshi', sans-serif;
   font-weight: 700;
   font-size: 1.25em;
 }
@@ -34,14 +34,14 @@
 
 /* Стиль для названия машины */
 .machine {
-  font-family: "Satoshi", sans-serif;
+  font-family: 'Satoshi', sans-serif;
   font-weight: 700;
   font-size: 24px;
 }
 
 /* Стиль для времени бронирования */
 .timeb {
-  font-family: "Satoshi", sans-serif;
+  font-family: 'Satoshi', sans-serif;
   font-weight: 500;
   font-size: 14px;
 }
@@ -52,7 +52,7 @@
   width: 350px;
   height: 50px;
   border-radius: 25px;
-  font-family: "Satoshi", sans-serif;
+  font-family: 'Satoshi', sans-serif;
   font-weight: 700;
   color: #ffffff;
   border: none;
@@ -90,14 +90,14 @@
 
 /* Стиль для названия детали на странице Item */
 .item-title {
-  font-family: "Satoshi", sans-serif;
+  font-family: 'Satoshi', sans-serif;
   font-weight: 700;
   font-size: 2em;
 }
 
 /* Стиль для времени до начала бронирования на странице Item */
 .item-time-left {
-  font-family: "Satoshi", sans-serif;
+  font-family: 'Satoshi', sans-serif;
   font-weight: 500;
   font-size: 1em;
 }
@@ -110,14 +110,14 @@
 
 /* Стиль для блока с местом и этажом */
 .item-location {
-  font-family: "Satoshi", sans-serif;
+  font-family: 'Satoshi', sans-serif;
   font-weight: 700;
   font-size: 1.5em;
 }
 
 /* Стиль для блока с датами и временем */
 .item-dates {
-  font-family: "Satoshi", sans-serif;
+  font-family: 'Satoshi', sans-serif;
   font-weight: 400;
   font-size: 1em;
 }
@@ -146,86 +146,85 @@
 }
 
 @media (max-width: 768px) {
-    .bookbox {
-      width: auto;
-    }
-  
-    .interval {
-      font-size: 1em;
-    }
-  
-    .machine {
-      font-size: 20px;
-    }
-  
-    .timeb {
-      font-size: 12px;
-    }
-  
-    .book-button {
-      width: 70vw;
-      height: 45px;
-      font-size: 1.25em;
-    }
-  
-    .item-details {
-      width: 80vw;
-    }
-  
-    .item-title {
-      font-size: 1.75em;
-    }
-  
-    .item-location {
-      font-size: 1.25em;
-    }
-  
-    .cancel-button {
-      width: 40vw;
-      height: 6vh;
-      font-size: 0.9em;
-    }
+  .bookbox {
+    width: auto;
   }
-  
-  @media (max-width: 480px) {
-    .bookbox {
-      width: auto;
-    }
-  
-    .interval {
-      font-size: 0.875em;
-    }
-  
-    .machine {
-      font-size: 18px;
-    }
-  
-    .timeb {
-      font-size: 10px;
-    }
-  
-    .book-button {
-      width: 90vw;
-      height: 40px;
-      font-size: 1em;
-    }
-  
-    .item-details {
-      width: 90vw;
-    }
-  
-    .item-title {
-      font-size: 1.5em;
-    }
-  
-    .item-location {
-      font-size: 1em;
-    }
-  
-    .cancel-button {
-      width: 60vw;
-      height: 5vh;
-      font-size: 0.75em;
-    }
+
+  .interval {
+    font-size: 1em;
   }
-  
+
+  .machine {
+    font-size: 20px;
+  }
+
+  .timeb {
+    font-size: 12px;
+  }
+
+  .book-button {
+    width: 70vw;
+    height: 45px;
+    font-size: 1.25em;
+  }
+
+  .item-details {
+    width: 80vw;
+  }
+
+  .item-title {
+    font-size: 1.75em;
+  }
+
+  .item-location {
+    font-size: 1.25em;
+  }
+
+  .cancel-button {
+    width: 40vw;
+    height: 6vh;
+    font-size: 0.9em;
+  }
+}
+
+@media (max-width: 480px) {
+  .bookbox {
+    width: auto;
+  }
+
+  .interval {
+    font-size: 0.875em;
+  }
+
+  .machine {
+    font-size: 18px;
+  }
+
+  .timeb {
+    font-size: 10px;
+  }
+
+  .book-button {
+    width: 90vw;
+    height: 40px;
+    font-size: 1em;
+  }
+
+  .item-details {
+    width: 90vw;
+  }
+
+  .item-title {
+    font-size: 1.5em;
+  }
+
+  .item-location {
+    font-size: 1em;
+  }
+
+  .cancel-button {
+    width: 60vw;
+    height: 5vh;
+    font-size: 0.75em;
+  }
+}

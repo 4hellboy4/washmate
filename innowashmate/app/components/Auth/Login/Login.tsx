@@ -1,12 +1,12 @@
 // components/Auth/Login/Login.tsx
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import AuthInputField from "../AuthInputField/AuthInputField";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { FIREBASE_AUTH } from "@/FirebaseConfig";
-import { Link } from "react-router-dom";
-import "../Auth.css";
-import { useRouter } from "next/router";
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import AuthInputField from '../AuthInputField/AuthInputField';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { FIREBASE_AUTH } from '@/FirebaseConfig';
+import { Link } from 'react-router-dom';
+import '../Auth.css';
+import { useRouter } from 'next/router';
 
 interface FormData {
   email: string;
@@ -17,8 +17,8 @@ const Login: React.FC = () => {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState<FormData>({
-    email: "",
-    password: "",
+    email: '',
+    password: '',
   });
 
   const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
@@ -38,10 +38,10 @@ const Login: React.FC = () => {
         formData.password,
       );
       const user = userCredential.user;
-      console.log("Login Form submitted:", formData);
-      navigate("/");
+      console.log('Login Form submitted:', formData);
+      navigate('/');
     } catch (error) {
-      console.error("assdfsdf", error);
+      console.error('assdfsdf', error);
     }
   };
 
@@ -66,7 +66,7 @@ const Login: React.FC = () => {
         />
         <button type="submit">Login</button>
       </form>
-      <Link to={"/signup"}>If not registered - Signup.</Link>
+      <Link to={'/signup'}>If not registered - Signup.</Link>
     </div>
   );
 };

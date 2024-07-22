@@ -5,7 +5,7 @@
   background-color: #40ba21;
   justify-content: center;
   align-items: center;
-  font-family: "Satoshi", sans-serif;
+  font-family: 'Satoshi', sans-serif;
   color: white;
   border: none;
   border-radius: 25px;
@@ -27,7 +27,7 @@
   background-color: white;
   color: black;
   font-size: 24px;
-  font-family: "Satoshi", sans-serif;
+  font-family: 'Satoshi', sans-serif;
 }
 
 .dropselection {
@@ -63,25 +63,25 @@
   height: 8vh;
   color: #f8f8f8;
   background-color: #91a3b0;
-  font-family: "Satoshi", sans-serif;
+  font-family: 'Satoshi', sans-serif;
   border-radius: 15px;
   font-size: 1rem;
   font-weight: 700;
 }
 
-.radiostyle input[type="radio"] {
+.radiostyle input[type='radio'] {
   display: none;
 }
 
-.radiostyle input[type="radio"] + label {
+.radiostyle input[type='radio'] + label {
   display: flex;
   align-items: center;
   cursor: pointer;
   position: relative;
 }
 
-.radiostyle input[type="radio"] + label::before {
-  content: "";
+.radiostyle input[type='radio'] + label::before {
+  content: '';
   display: inline-block;
   width: 24px;
   height: 24px;
@@ -90,7 +90,7 @@
   margin-right: 10px;
 }
 
-.radiostyle input[type="radio"]:checked + label::before {
+.radiostyle input[type='radio']:checked + label::before {
   background-color: #6ad94e;
 }
 
@@ -115,7 +115,7 @@
   height: 5vh;
   border-radius: 10px;
   color: #f8f8f8;
-  font-family: "Satoshi", sans-serif;
+  font-family: 'Satoshi', sans-serif;
   font-size: 18px;
   font-weight: 700;
   background-color: #91a3b0;
@@ -156,14 +156,14 @@
 
 .time-slot {
   width: 100px;
-  font-family: "Satoshi", sans-serif;
+  font-family: 'Satoshi', sans-serif;
   font-size: 18px;
   text-align: center;
 }
 
 .booking-info {
   flex-grow: 1;
-  font-family: "Satoshi", sans-serif;
+  font-family: 'Satoshi', sans-serif;
   font-size: 18px;
   text-align: center;
 }
@@ -178,14 +178,14 @@
 }
 
 .time-choice {
-  font-family: "Satoshi", sans-serif;
+  font-family: 'Satoshi', sans-serif;
   font-size: 18px;
   padding: 1em;
   border-radius: 25px;
 }
 
 .book-buttond {
-  font-family: "Satoshi", sans-serif;
+  font-family: 'Satoshi', sans-serif;
   font-size: 18px;
   padding: 10px 20px;
   background-color: #40ba21;

@@ -1,7 +1,7 @@
-import React from "react";
-import Image from "next/image";
-import "./TimeSlotDetails.css";
-import clock from "../../assets/clock.svg";
+import React from 'react';
+import Image from 'next/image';
+import './TimeSlotDetails.css';
+import clock from '../../assets/clock.svg';
 
 const TimeSlotDetails: React.FC = () => {
   return (

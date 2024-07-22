@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { doc, getDoc, deleteDoc } from "firebase/firestore";
-import { FIRESTORE_DB } from "@/FirebaseConfig";
-import "./Item.css";
-import ReactLoading from "react-loading";
+import React, { useEffect, useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import { doc, getDoc, deleteDoc } from 'firebase/firestore';
+import { FIRESTORE_DB } from '@/FirebaseConfig';
+import './Item.css';
+import ReactLoading from 'react-loading';
 
 interface Schedule {
   id: string;
@@ -23,13 +23,13 @@ const Item: React.FC = () => {
       try {
         const schedulesCollection = doc(
           FIRESTORE_DB,
-          "schedules",
-          id.split("-").slice(0, 2).join("-"),
+          'schedules',
+          id.split('-').slice(0, 2).join('-'),
         ); // Получаем ссылку на документ
         const docSnap = await getDoc(schedulesCollection);
 
         if (!docSnap.exists()) {
-          console.error("No such schedule!");
+          console.error('No such schedule!');
           return;
         }
 
@@ -40,7 +40,7 @@ const Item: React.FC = () => {
         const booking = bookings.find((booking) => booking.id === id);
         setMachineDetails(booking || null);
       } catch (error) {
-        console.error("Error fetching machine details:", error);
+        console.error('Error fetching machine details:', error);
       } finally {
         setLoading(false);
       }
@@ -51,7 +51,7 @@ const Item: React.FC = () => {
 
   const formatTimeLeft = (time: string) => {
     const now = Date.now();
-    const [hours, minutes] = time.split(":").map(Number);
+    const [hours, minutes] = time.split(':').map(Number);
     const bookingTime = new Date();
     bookingTime.setHours(hours, minutes, 0, 0);
     const startTime = bookingTime.getTime();
@@ -66,7 +66,7 @@ const Item: React.FC = () => {
     }
 
     const timeLeft = endTime - now;
-    if (timeLeft <= 0) return "Time Expired";
+    if (timeLeft <= 0) return 'Time Expired';
 
     const hoursLeft = Math.floor((timeLeft / (1000 * 60 * 60)) % 24);
     const minutesLeft = Math.floor((timeLeft / (1000 * 60)) % 60);
@@ -78,21 +78,21 @@ const Item: React.FC = () => {
   const handleCancel = async () => {
     if (machineDetails) {
       const now = Date.now();
-      const [hours, minutes] = machineDetails.time.split(":").map(Number);
+      const [hours, minutes] = machineDetails.time.split(':').map(Number);
       const bookingTime = new Date();
       bookingTime.setHours(hours, minutes, 0, 0);
       const startTime = bookingTime.getTime();
 
       if (now >= startTime) {
-        alert("Cannot cancel, the booking time has already started.");
+        alert('Cannot cancel, the booking time has already started.');
         return;
       }
 
       try {
         const docRef = doc(
           FIRESTORE_DB,
-          "schedules",
-          id.split("-").slice(0, 2).join("-"),
+          'schedules',
+          id.split('-').slice(0, 2).join('-'),
         );
         const docSnap = await getDoc(docRef);
 
@@ -109,13 +109,13 @@ const Item: React.FC = () => {
             bookings: updatedBookings,
           }); // Сохраняем обновленные данные
 
-          alert("Booking cancelled successfully.");
+          alert('Booking cancelled successfully.');
         }
       } catch (error) {
-        console.error("Error cancelling booking:", error);
+        console.error('Error cancelling booking:', error);
       }
 
-      navigate("/");
+      navigate('/');
     }
   };
 
@@ -142,8 +142,8 @@ const Item: React.FC = () => {
         </p>
         <div className="item-info">
           <div className="item-location">
-            <h2>{machineDetails.id.split("-")[0]}</h2> {/* Dorm */}
-            <h2>{machineDetails.id.split("-")[1]}</h2> {/* Floor */}
+            <h2>{machineDetails.id.split('-')[0]}</h2> {/* Dorm */}
+            <h2>{machineDetails.id.split('-')[1]}</h2> {/* Floor */}
           </div>
           <div className="item-dates">
             <p>Day: {machineDetails.selectedDay}</p>

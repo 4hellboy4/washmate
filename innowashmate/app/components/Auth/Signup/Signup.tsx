@@ -1,12 +1,12 @@
 // components/Auth/Signup/Signup.tsx
-import React, { useState } from "react";
-import AuthInputField from "../AuthInputField/AuthInputField";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { doc, setDoc } from "firebase/firestore";
+import React, { useState } from 'react';
+import AuthInputField from '../AuthInputField/AuthInputField';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { doc, setDoc } from 'firebase/firestore';
 
-import "../Auth.css";
-import { FIREBASE_AUTH, FIRESTORE_DB } from "@/FirebaseConfig";
-import { Link, useNavigate } from "react-router-dom";
+import '../Auth.css';
+import { FIREBASE_AUTH, FIRESTORE_DB } from '@/FirebaseConfig';
+import { Link, useNavigate } from 'react-router-dom';
 
 interface FormData {
   FullName: string;
@@ -18,10 +18,10 @@ interface FormData {
 const Signup: React.FC = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState<FormData>({
-    FullName: "",
-    TgAlias: "",
-    email: "",
-    password: "",
+    FullName: '',
+    TgAlias: '',
+    email: '',
+    password: '',
   });
 
   const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
@@ -46,16 +46,16 @@ const Signup: React.FC = () => {
       const token = await user.getIdToken();
 
       // Create document in Firestore
-      await setDoc(doc(FIRESTORE_DB, "users", user.uid), {
+      await setDoc(doc(FIRESTORE_DB, 'users', user.uid), {
         name: formData.FullName,
         email: formData.email,
         tg: formData.TgAlias,
         token: token,
       });
-      navigate("/");
-      console.log("REGISTER Form submitted:", formData);
+      navigate('/');
+      console.log('REGISTER Form submitted:', formData);
     } catch (error) {
-      console.error("Error registering user:", error);
+      console.error('Error registering user:', error);
     }
   };
 
@@ -94,7 +94,7 @@ const Signup: React.FC = () => {
         />
         <button type="submit">Signup</button>
       </form>
-      <Link to={"/signup"}>If already registered - Login.</Link>
+      <Link to={'/signup'}>If already registered - Login.</Link>
     </div>
   );
 };

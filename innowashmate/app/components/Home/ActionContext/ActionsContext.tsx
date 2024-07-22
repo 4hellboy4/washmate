@@ -1,8 +1,8 @@
-import React from "react";
-import Image from "next/image";
-import notif from "@/app/assets/notfi.svg";
+import React from 'react';
+import Image from 'next/image';
+import notif from '@/app/assets/notfi.svg';
 
-import "./ActionsContext.css";
+import './ActionsContext.css';
 
 const ActionsContext: React.FC = () => {
   return (

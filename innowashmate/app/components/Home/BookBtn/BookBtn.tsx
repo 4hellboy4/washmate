@@ -1,5 +1,5 @@
-import React from "react";
-import "./BookBtn.css";
+import React from 'react';
+import './BookBtn.css';
 
 interface BookBtnProps {
   onClick: () => void;

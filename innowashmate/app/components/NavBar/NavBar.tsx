@@ -1,17 +1,17 @@
-import React from "react";
-import Image from "next/image";
-import photo from "../../assets/logoh.svg";
-import dash from "../../assets/dash.svg";
-import home from "../../assets/home.svg";
-import info from "../../assets/info.svg";
-import user from "../../assets/user.svg";
-import smile from "../../assets/smile.svg";
-import telegram from "../../assets/telegram.svg";
-import { Link } from "react-router-dom";
+import React from 'react';
+import Image from 'next/image';
+import photo from '../../assets/logoh.svg';
+import dash from '../../assets/dash.svg';
+import home from '../../assets/home.svg';
+import info from '../../assets/info.svg';
+import user from '../../assets/user.svg';
+import smile from '../../assets/smile.svg';
+import telegram from '../../assets/telegram.svg';
+import { Link } from 'react-router-dom';
 
-import PersonalInfo from "./PersonalInfo/PersonalInfo";
+import PersonalInfo from './PersonalInfo/PersonalInfo';
 
-import "./NavBar.css";
+import './NavBar.css';
 
 const NavBar: React.FC = () => {
   return (
@@ -22,31 +22,31 @@ const NavBar: React.FC = () => {
         </div>
         <PersonalInfo />
         <div className="pages">
-          <Link to={"/"}>
+          <Link to={'/'}>
             <div className="button">
               <Image src={home} alt="home" className="icon"></Image>
               <h6 className="servicef">Home</h6>
             </div>
           </Link>
-          <Link to={"/dashboard"}>
+          <Link to={'/dashboard'}>
             <div className="button">
               <Image src={dash} alt="dash" className="icon"></Image>
               <h6 className="servicef">Dashboard</h6>
             </div>
           </Link>
-          <Link to={"/about"}>
+          <Link to={'/about'}>
             <div className="button">
               <Image src={info} alt="info" className="icon"></Image>
               <h6 className="servicef">About</h6>
             </div>
           </Link>
-          <Link to={"/login"}>
+          <Link to={'/login'}>
             <div className="button">
               <Image src={info} alt="info" className="icon"></Image>
               <h6 className="servicef">login</h6>
             </div>
           </Link>
-          <Link to={"/signup"}>
+          <Link to={'/signup'}>
             <div className="button">
               <Image src={info} alt="info" className="icon"></Image>
               <h6 className="servicef">signup</h6>
