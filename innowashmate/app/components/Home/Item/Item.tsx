@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { doc, getDoc, deleteDoc } from 'firebase/firestore';
+import { doc, getDoc, setDoc, deleteDoc } from 'firebase/firestore';
 import { FIRESTORE_DB } from '@/FirebaseConfig';
 import './Item.css';
 import ReactLoading from 'react-loading';
@@ -19,6 +19,11 @@ const Item: React.FC = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    if (!id) {
+      console.error("No ID provided.");
+      setLoading(false);
+      return;
+    }
     const fetchMachineDetails = async () => {
       try {
         const schedulesCollection = doc(
@@ -76,6 +81,10 @@ const Item: React.FC = () => {
   };
 
   const handleCancel = async () => {
+    if (!id) {
+      console.error("No ID provided.");
+      return;
+    }
     if (machineDetails) {
       const now = Date.now();
       const [hours, minutes] = machineDetails.time.split(':').map(Number);

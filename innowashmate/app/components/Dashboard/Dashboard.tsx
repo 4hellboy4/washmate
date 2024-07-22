@@ -152,24 +152,28 @@ const Dashboard: React.FC = () => {
     const docSnap = await getDoc(docRef);
 
     if (!docSnap.exists()) {
-      // Если документа нет, создаем его с первым бронированием
+
       await setDoc(docRef, {
-        bookings: [bookingData], // Создаем массив с первым бронированием
+        bookings: [bookingData],
       });
     } else {
-      // Если документ существует, обновляем его
+
       const data = docSnap.data();
-      const existingBookings = data?.bookings || [];
+      const existingBookings = data?.bookings as Schedule[] || [];
 
-      // Проверяем, есть ли уже бронирование на это время и день
-      const updatedBookings = existingBookings.filter(
-        (booking) => booking.id !== slotId,
-      );
-      updatedBookings.push(bookingData);
+      if (Array.isArray(existingBookings)) {
+        const updatedBookings = existingBookings.filter((booking) => booking.id !== slotId);
+        updatedBookings.push(bookingData);
 
-      await updateDoc(docRef, {
-        bookings: updatedBookings, // Обновляем массив бронирований
-      });
+        await updateDoc(docRef, {
+          bookings: updatedBookings,
+        });
+      } else {
+
+        await updateDoc(docRef, {
+          bookings: [bookingData],
+        });
+      }
     }
 
     alert('Machine booked successfully');
