@@ -303,7 +303,7 @@ const Dashboard: React.FC = () => {
               </option>
             ))}
           </select>
-          <button className="book-button" onClick={handleBooking}>
+          <button className="book-buttond" onClick={handleBooking}>
             BOOK
           </button>
         </div>

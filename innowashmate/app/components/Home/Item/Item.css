@@ -144,3 +144,88 @@
   justify-self: center;
   align-self: center;
 }
+
+@media (max-width: 768px) {
+    .bookbox {
+      width: auto;
+    }
+  
+    .interval {
+      font-size: 1em;
+    }
+  
+    .machine {
+      font-size: 20px;
+    }
+  
+    .timeb {
+      font-size: 12px;
+    }
+  
+    .book-button {
+      width: 70vw;
+      height: 45px;
+      font-size: 1.25em;
+    }
+  
+    .item-details {
+      width: 80vw;
+    }
+  
+    .item-title {
+      font-size: 1.75em;
+    }
+  
+    .item-location {
+      font-size: 1.25em;
+    }
+  
+    .cancel-button {
+      width: 40vw;
+      height: 6vh;
+      font-size: 0.9em;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .bookbox {
+      width: auto;
+    }
+  
+    .interval {
+      font-size: 0.875em;
+    }
+  
+    .machine {
+      font-size: 18px;
+    }
+  
+    .timeb {
+      font-size: 10px;
+    }
+  
+    .book-button {
+      width: 90vw;
+      height: 40px;
+      font-size: 1em;
+    }
+  
+    .item-details {
+      width: 90vw;
+    }
+  
+    .item-title {
+      font-size: 1.5em;
+    }
+  
+    .item-location {
+      font-size: 1em;
+    }
+  
+    .cancel-button {
+      width: 60vw;
+      height: 5vh;
+      font-size: 0.75em;
+    }
+  }
+  

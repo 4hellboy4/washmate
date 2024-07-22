@@ -37,3 +37,51 @@
   align-self: center;
   margin: 2em;
 }
+
+@media (max-width: 768px) {
+    .Name {
+      font-size: 1.75em;
+    }
+  
+    .email {
+      font-size: 1.1em;
+    }
+  
+    .telegramtag {
+      font-size: 1.25em;
+    }
+  
+    .telegram {
+      flex-direction: column;
+      align-items: center;
+      row-gap: 0.5em;
+    }
+  
+    .centerloading {
+      margin: 1.5em;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .Name {
+      font-size: 1.5em;
+    }
+  
+    .email {
+      font-size: 1em;
+    }
+  
+    .telegramtag {
+      font-size: 1em;
+    }
+  
+    .telegram {
+      flex-direction: column;
+      align-items: center;
+      row-gap: 0.5em;
+    }
+  
+    .centerloading {
+      margin: 1em;
+    }
+  }

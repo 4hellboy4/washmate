@@ -73,3 +73,77 @@
 .bookbtn:hover {
   background-color: #64c04d;
 }
+
+@media (max-width: 768px) {
+    .home {
+      width: 90vw;
+      padding: 1em;
+    }
+  
+    .Bookings {
+      width: 70vw;
+      padding: 1em;
+    }
+  
+    .bookbox {
+      width: 80vw;
+      height: auto;
+      margin-bottom: 1em;
+    }
+  
+    .clock {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  
+    .machine {
+      font-size: 1.25em;
+    }
+  
+    .timeb {
+      font-size: 0.875em;
+    }
+  
+    .bookbtn {
+      width: 30vw;
+      font-size: 1.25em;
+      padding: 0.5em;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .home {
+      width: 95vw;
+      padding: 0.5em;
+    }
+  
+    .Bookings {
+      width: 85vw;
+      padding: 0.5em;
+    }
+  
+    .bookbox {
+      width: 90vw;
+      height: auto;
+      margin-bottom: 1em;
+    }
+  
+    .clock {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  
+    .machine {
+      font-size: 1em;
+    }
+  
+    .timeb {
+      font-size: 0.75em;
+    }
+  
+    .bookbtn {
+      width: 50vw;
+      font-size: 1em;
+      padding: 0.5em;
+    }
+  }

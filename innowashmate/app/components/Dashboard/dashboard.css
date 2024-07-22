@@ -173,16 +173,18 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  margin-top: 0.75em;
+  margin: 0.75em;
+  column-gap: 1em;
 }
 
 .time-choice {
   font-family: "Satoshi", sans-serif;
   font-size: 18px;
   padding: 1em;
+  border-radius: 25px;
 }
 
-.book-button {
+.book-buttond {
   font-family: "Satoshi", sans-serif;
   font-size: 18px;
   padding: 10px 20px;
@@ -191,8 +193,110 @@
   border: none;
   border-radius: 10px;
   cursor: pointer;
+  width: 5vw;
+  height: auto;
+  transition: all 0.5s ease-in-out;
 }
 
-.book-button {
+.book-buttond:hover {
   background-color: #369917;
+}
+
+@media (max-width: 768px) {
+  .dchoice {
+    font-size: 2rem;
+    padding: 0.25rem;
+    width: 50%;
+    justify-self: center;
+    align-self: center;
+  }
+
+  .dropselection {
+    flex-direction: column;
+    row-gap: 1em;
+  }
+
+  .radios {
+    flex-direction: row;
+    column-gap: 0.5em;
+  }
+
+  .radiostyle {
+    width: auto;
+    height: auto;
+    font-size: 0.75rem;
+    padding: 0.5em;
+  }
+
+  .schedule {
+    width: 90vw;
+    height: 50vh;
+  }
+
+  .daystyle {
+    font-size: 16px;
+    padding: 0.5em;
+  }
+
+  .schedule-table {
+    width: 90vw;
+  }
+
+  .time-slot,
+  .booking-info {
+    font-size: 16px;
+  }
+
+  .book-buttond {
+    width: 20vw;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .dchoice {
+    font-size: 1.5rem;
+    padding: 0.25rem;
+  }
+
+  .dropselection {
+    flex-direction: column;
+    row-gap: 0.5em;
+  }
+
+  .radios {
+    flex-direction: row;
+    column-gap: 0.5em;
+  }
+
+  .radiostyle {
+    width: auto;
+    height: auto;
+    font-size: 0.75rem;
+    padding: 0.5em;
+  }
+
+  .schedule {
+    width: 95vw;
+    height: 45vh;
+  }
+
+  .daystyle {
+    font-size: 14px;
+    padding: 0.25em;
+  }
+
+  .schedule-table {
+    width: 95vw;
+  }
+
+  .time-slot,
+  .booking-info {
+    font-size: 14px;
+  }
+
+  .book-buttond {
+    width: 20vw;
+    font-size: 14px;
+  }
 }

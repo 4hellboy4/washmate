@@ -69,3 +69,45 @@
   align-self: flex-end;
   justify-self: flex-end;
 }
+
+@media (max-width: 768px) {
+  .abouttxt2 {
+    width: 80vw;
+    font-size: 1.5em;
+  }
+
+  .booka {
+    font-size: 2em;
+  }
+
+  .rules {
+    font-size: 1.5em;
+  }
+
+  .credits {
+    font-size: 0.85em;
+  }
+}
+
+@media (max-width: 480px) {
+  .abouttxt1 {
+    font-size: 1.5em;
+  }
+
+  .abouttxt2 {
+    width: 90vw;
+    font-size: 1.25em;
+  }
+
+  .booka {
+    font-size: 1.75em;
+  }
+
+  .rules {
+    font-size: 1.25em;
+  }
+
+  .credits {
+    font-size: 0.75em;
+  }
+}

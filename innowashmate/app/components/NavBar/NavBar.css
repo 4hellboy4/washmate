@@ -114,3 +114,67 @@
   align-self: center;
   left: 1.5em;
 }
+
+@media (max-width: 768px) {
+  .sidebar {
+    width: 60vw;
+    left: 2.5%;
+    padding: 1em;
+  }
+
+  .button {
+    width: 40vw;
+    height: 6vh;
+    margin: 0.5em;
+  }
+
+  .logout {
+    width: 30vw;
+    height: 6vh;
+    margin: 0.5em;
+  }
+
+  .picemoji {
+    width: 25vw;
+    height: 25vw;
+  }
+
+  .logo {
+    width: 25vw;
+    left: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .sidebar {
+    width: 90vw;
+    left: 0;
+    padding: 0.5em;
+  }
+
+  .button {
+    width: 70vw;
+    height: 5.5vh;
+    margin: 0.25em;
+  }
+
+  .logout {
+    width: 50vw;
+    height: 5.5vh;
+    margin: 0.25em;
+  }
+
+  .servicef {
+    font-size: 1.25em;
+  }
+
+  .picemoji {
+    width: 35vw;
+    height: 35vw;
+  }
+
+  .logo {
+    width: 35vw;
+    left: 0;
+  }
+}
