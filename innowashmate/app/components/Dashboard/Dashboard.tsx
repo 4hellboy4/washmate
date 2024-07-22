@@ -152,24 +152,23 @@ const Dashboard: React.FC = () => {
     const docSnap = await getDoc(docRef);
 
     if (!docSnap.exists()) {
-
       await setDoc(docRef, {
         bookings: [bookingData],
       });
     } else {
-
       const data = docSnap.data();
-      const existingBookings = data?.bookings as Schedule[] || [];
+      const existingBookings = (data?.bookings as Schedule[]) || [];
 
       if (Array.isArray(existingBookings)) {
-        const updatedBookings = existingBookings.filter((booking) => booking.id !== slotId);
+        const updatedBookings = existingBookings.filter(
+          (booking) => booking.id !== slotId,
+        );
         updatedBookings.push(bookingData);
 
         await updateDoc(docRef, {
           bookings: updatedBookings,
         });
       } else {
-
         await updateDoc(docRef, {
           bookings: [bookingData],
         });

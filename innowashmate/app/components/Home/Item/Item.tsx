@@ -20,7 +20,7 @@ const Item: React.FC = () => {
 
   useEffect(() => {
     if (!id) {
-      console.error("No ID provided.");
+      console.error('No ID provided.');
       setLoading(false);
       return;
     }
@@ -82,7 +82,7 @@ const Item: React.FC = () => {
 
   const handleCancel = async () => {
     if (!id) {
-      console.error("No ID provided.");
+      console.error('No ID provided.');
       return;
     }
     if (machineDetails) {
