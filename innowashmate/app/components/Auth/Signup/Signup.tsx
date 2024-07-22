@@ -3,10 +3,10 @@ import React, { useState } from 'react';
 import AuthInputField from '../AuthInputField/AuthInputField';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
-
+import {useRouter} from "next/router";
 import '../Auth.css';
 import { FIREBASE_AUTH, FIRESTORE_DB } from '@/FirebaseConfig';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 interface FormData {
   FullName: string;
@@ -16,7 +16,7 @@ interface FormData {
 }
 
 const Signup: React.FC = () => {
-  const navigate = useNavigate();
+  const router = useRouter();
   const [formData, setFormData] = useState<FormData>({
     FullName: '',
     TgAlias: '',
@@ -52,7 +52,7 @@ const Signup: React.FC = () => {
         tg: formData.TgAlias,
         token: token,
       });
-      navigate('/');
+      router.push('/');
       console.log('REGISTER Form submitted:', formData);
     } catch (error) {
       console.error('Error registering user:', error);

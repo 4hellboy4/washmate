@@ -7,23 +7,22 @@ import info from '../../assets/info.svg';
 import user from '../../assets/user.svg';
 import smile from '../../assets/smile.svg';
 import telegram from '../../assets/telegram.svg';
-import {Link, useNavigate} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 import { signOut } from 'firebase/auth';
 import { FIREBASE_AUTH } from '@/FirebaseConfig'; // Adjust the path according to your project structure
 
 import PersonalInfo from './PersonalInfo/PersonalInfo';
-
-import './NavBar.css';
+import { useRouter } from 'next/router';
+// import './NavBar.css';
 
 const NavBar: React.FC = () => {
-  const navigate = useNavigate();
-
+  const router = useRouter();
 
   const handleLogout = async () => {
     try {
       await signOut(FIREBASE_AUTH);
-      navigate('/login'); // Redirect to the login page after logout
+      router.push('/login'); // Redirect to the login page after logout
     } catch (error) {
       console.error('Error signing out:', error);
     }

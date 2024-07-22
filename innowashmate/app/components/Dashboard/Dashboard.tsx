@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/router';
 import {
   doc,
   getDoc,
@@ -41,7 +41,7 @@ const Dashboard: React.FC = () => {
   const [time, setTime] = useState('00:00');
   const [schedule, setSchedule] = useState<Schedule[]>([]);
   const [userName, setUserName] = useState('');
-  const navigate = useNavigate();
+  const router = useRouter();
 
   // fetch USERNAME
   useEffect(() => {

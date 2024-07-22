@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/router';
 import Image from 'next/image'; // You can still use Image from next/image if you need its optimization features
 import { getDoc, doc } from 'firebase/firestore';
 import { FIREBASE_AUTH, FIRESTORE_DB } from '@/FirebaseConfig';
 import { onAuthStateChanged } from 'firebase/auth';
 import telegram from '@/app/assets/telegram.svg';
-import './PersonalInfo.css';
+import './PersonalInfo.module.css';
 import ReactLoading from 'react-loading';
-
 interface UserInfo {
   name: string;
   email: string;
@@ -16,7 +15,7 @@ interface UserInfo {
 
 const PersonalInfo: React.FC = () => {
   const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
-  const navigate = useNavigate();
+  const router = useRouter();
 
   useEffect(() => {
     const fetchUserInfo = async (userId: string) => {
@@ -26,7 +25,7 @@ const PersonalInfo: React.FC = () => {
       if (docSnap.exists()) {
         setUserInfo(docSnap.data() as UserInfo);
       } else {
-        navigate('/signup');
+        router.push('/signup');
       }
     };
 
@@ -34,12 +33,12 @@ const PersonalInfo: React.FC = () => {
       if (user) {
         fetchUserInfo(user.uid);
       } else {
-        navigate('/signup');
+        router.push('/signup');
       }
     });
 
     return () => unsubscribe();
-  }, [navigate]);
+  }, [router]);
 
   if (!userInfo) {
     return (

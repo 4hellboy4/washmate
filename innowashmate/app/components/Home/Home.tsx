@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/router';
 import { doc, getDoc, collection, getDocs } from 'firebase/firestore';
 import { FIRESTORE_DB, FIREBASE_AUTH } from '@/FirebaseConfig';
-import './home.css';
+import './home.module.css';
 import ReactLoading from 'react-loading';
 
 interface Schedule {
@@ -17,7 +17,7 @@ const Home: React.FC = () => {
   const [bookedSchedules, setBookedSchedules] = useState<Schedule[]>([]);
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState<any>(null);
-  const navigate = useNavigate();
+  const router = useRouter();
 
   useEffect(() => {
     const unsubscribe = FIREBASE_AUTH.onAuthStateChanged(
@@ -26,12 +26,12 @@ const Home: React.FC = () => {
           setUser(currentUser);
           await fetchBookedSchedules(currentUser.uid);
         } else {
-          navigate('/signup');
+          router.push('/signup'); // Используйте router.push вместо navigate
         }
       },
     );
     return () => unsubscribe();
-  }, [navigate]);
+  }, [router]);
 
   const fetchBookedSchedules = async (userId: string) => {
     try {
@@ -45,7 +45,6 @@ const Home: React.FC = () => {
 
       const userName = userDocSnap.data()?.name;
 
-      // Извлечение всех документов из коллекции 'schedules'
       const schedulesCollection = collection(FIRESTORE_DB, 'schedules');
       const schedulesSnapshot = await getDocs(schedulesCollection);
 
@@ -76,7 +75,7 @@ const Home: React.FC = () => {
   };
 
   const handleSlotClick = (slotId: string) => {
-    navigate(`/item/${slotId}`);
+    router.push(`/item/${slotId}`); // Используйте router.push вместо navigate
   };
 
   if (loading) {
@@ -104,8 +103,7 @@ const Home: React.FC = () => {
                   <p className="timeb">{formatTime(time)}</p>
                   <h1 className="machine">{selectedMachine}</h1>
                   <p className="user">Booked by: {userName}</p>
-                  <p className="slot-id">Slot ID: {id}</p>{' '}
-                  {/* Отображаем ID временного слота */}
+                  <p className="slot-id">Slot ID: {id}</p>
                   <p className="day">Day: {selectedDay}</p>
                 </div>
               </div>
@@ -114,7 +112,7 @@ const Home: React.FC = () => {
         ) : (
           <p>No booked machines found.</p>
         )}
-        <button className="bookbtn" onClick={() => navigate('/dashboard')}>
+        <button className="bookbtn" onClick={() => router.push('/dashboard')}>
           BOOK
         </button>
       </div>

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
 import { doc, getDoc, setDoc, deleteDoc } from 'firebase/firestore';
 import { FIRESTORE_DB } from '@/FirebaseConfig';
 import './Item.css';
 import ReactLoading from 'react-loading';
+import {useRouter} from "next/router";
 
 interface Schedule {
   id: string;
@@ -12,9 +12,13 @@ interface Schedule {
   time: string;
   userName: string;
 }
-const Item: React.FC = () => {
-  const { id } = useParams<{ id: string }>();
-  const navigate = useNavigate();
+
+interface ItemProps {
+  id: string;
+}
+
+const Item: React.FC<ItemProps> = ({id}) => {
+  const router = useRouter();
   const [machineDetails, setMachineDetails] = useState<Schedule | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -124,7 +128,7 @@ const Item: React.FC = () => {
         console.error('Error cancelling booking:', error);
       }
 
-      navigate('/');
+      router.push('/');
     }
   };
 

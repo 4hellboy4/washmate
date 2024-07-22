@@ -1,6 +1,6 @@
 // components/Auth/Login/Login.tsx
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/router';
 import AuthInputField from '../AuthInputField/AuthInputField';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { FIREBASE_AUTH } from '@/FirebaseConfig';
@@ -14,7 +14,7 @@ interface FormData {
 }
 
 const Login: React.FC = () => {
-  const navigate = useNavigate();
+  const router = useRouter();
 
   const [formData, setFormData] = useState<FormData>({
     email: '',
